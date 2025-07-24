@@ -5,7 +5,7 @@ const port = 3000;
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('ye gajni bhai ka backend hai');
+  res.send('Hitesh bhai or kitne hint doge');
 });
 
 app.listen(port, () => {

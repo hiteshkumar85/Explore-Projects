@@ -4,7 +4,7 @@ function App() {
 
   return (
     <div>
-      <h1>Vijay bhai ye frontend hai.</h1>
+      <h1>hitesh bhai or kitne hint doge....</h1>
     </div>
   )
 }
