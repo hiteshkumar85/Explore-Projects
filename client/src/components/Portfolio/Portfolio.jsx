@@ -1,5 +1,4 @@
 import React from 'react'
-import Web from './Web/Web'
 import { NavLink, Outlet } from 'react-router-dom'
 
 const Portfolio = () => {

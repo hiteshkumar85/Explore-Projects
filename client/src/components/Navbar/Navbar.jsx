@@ -1,8 +1,5 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import Home from "../Home/Home";
-import Portfolio from "../Portfolio/Portfolio";
-import Web from "../Portfolio/Web/Web";
 import './Navbar.css'
 
 const Navbar = () => {
