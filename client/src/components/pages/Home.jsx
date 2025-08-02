@@ -3,10 +3,10 @@ import DarkVeil from '../Animation/DarkVeil.jsx';
 import HomeText from "../Animation/homeText";
 // import ProjectSlider from './ProjectSlider.jsx';
 const Home = () => {
-    const text = `We Build\nScalable Projects\nfor the Ideas of Tomorrow`;
+    const text = `We Build Scalable Projects\nfor the Ideas of Tomorrow`;
 
     return (
-        <main className='h-full overflow-y-scroll no-scrollbar'>
+        <main className='h-full overflow-y-scroll no-scrollbar scroll-smooth'>
             <section className='relative h-[100vh] w-full flex flex-col text-white items-center justify-center'>
                 {/* <svg
                     id="wave"

@@ -5,6 +5,7 @@ import {
     IconDeviceImacCode,
     IconHome,
     IconDualScreen,
+    IconBackground,
 } from "@tabler/icons-react";
 import { motion } from 'framer-motion';
 import { Link, NavLink } from 'react-router-dom'
@@ -56,12 +57,27 @@ const Nav = () => {
             <motion.div
                 className='text-white fixed top-0 h-20 w-full bg-transparent  backdrop-blur-md origin-center left-1/2 
                 transform -translate-x-1/2 overflow-hidden z-5 flex items-center justify-between px-10'
-                initial={{ scale: '0', opacity: 0 }}
+                initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
             >
-                <Link to='/' className='text-2xl w-35 h-12 flex items-center'>logo</Link>
-                <nav className='flex justify-between'>
+                <motion.div 
+                    className='relative'
+                    initial={{ left: -500, opacity: 0}}
+                    animate={{left: 0, opacity: 1}}
+                    transition={{duration: 1.2, ease: "easeInOut"}}
+                >
+                    <Link to='/' className='text-2xl w-35 h-12 flex items-center'
+                    >
+                        logo
+                    </Link>
+                </motion.div>
+                <motion.nav
+                    className='flex justify-between relative'
+                    initial={{ top: -100, opacity: 0 }}
+                    animate={{ top: 0, opacity: 1 }}
+                    transition={{ duration: 1.2, ease: "easeInOut" }}
+                >
                     {links.map((link, i) => (
                         <NavLink
                             key={i}
@@ -77,8 +93,13 @@ const Nav = () => {
                         </NavLink>
 
                     ))}
-                </nav>
-                <button className='bg-[#00d4ff]/60 font-bold rounded-full w-35 h-12 text-xl'>Login</button>
+                </motion.nav>
+                <motion.button
+                    className='bg-[#00d4ff]/60 font-bold rounded-full w-35 h-12 text-xl relative'
+                    initial={{ right: -500, opacity: 0 }}
+                    animate={{ left: 0, opacity: 1 }}
+                    transition={{ duration: 1.2, ease: "easeInOut" }}
+                >Login</motion.button>
             </motion.div>
         )
     } else {
