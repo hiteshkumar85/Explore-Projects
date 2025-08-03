@@ -1,5 +1,6 @@
 import MagicBento from '../Animation/MagicBento.jsx';
 import HomeText from "../Animation/homeText.jsx";
+import SolutionSection from './SolutionSection.jsx';
 import About from './About.jsx';
 
 const Home = () => {
@@ -79,6 +80,8 @@ const Home = () => {
             </section>
             <section className='w-full text-white text-4xl flex flex-col justify-start items-center bg-[#060010]'>
                 <h1 className=''>Why Choose us?</h1>
+
+
                 <MagicBento
                     textAutoHide={true}
                     enableStars={true}
@@ -92,6 +95,9 @@ const Home = () => {
                     glowColor="132, 0, 255"
                 />
             </section>
+
+                <SolutionSection />
+
         </main>
     );
 };
