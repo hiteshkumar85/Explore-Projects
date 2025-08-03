@@ -1,34 +1,59 @@
 import MagicBento from '../Animation/MagicBento.jsx';
-import DarkVeil from '../Animation/DarkVeil.jsx';
-import HomeText from "../Animation/homeText";
-// import ProjectSlider from './ProjectSlider.jsx';
+import HomeText from "../Animation/homeText.jsx";
+import About from './About.jsx';
+
 const Home = () => {
     const text = `We Build Scalable Projects\nfor the Ideas of Tomorrow`;
 
     return (
         <main className='h-full overflow-y-scroll no-scrollbar scroll-smooth'>
-            <section className='relative h-[100vh] w-full flex flex-col text-white items-center justify-center'>
-                {/* <svg
-                    id="wave"
-                    className="transform rotate-180 absolute top-0 blur-3xl z-[-1]"
-                    viewBox="0 0 1440 320"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <defs>
-                        <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0.5">
-                            <stop stopColor="rgba(64, 255, 170, 1)" offset="0%" />
-                            <stop stopColor="rgba(64, 121, 255, 1)" offset="100%" />
-                        </linearGradient>
-                    </defs>
-                    <path
-                        fill="url(#sw-gradient-0)"
-                        style={{ transform: 'translate(0, 0px)', opacity: 0.5 }}
-                        d="M0,224L20,186.7C40,149,80,75,120,37.3C160,0,200,0,240,37.3C280,75,320,149,360,181.3C400,213,440,203,480,176C520,149,560,107,600,96C640,85,680,107,720,96C760,85,800,43,840,37.3C880,32,920,64,960,96C1000,128,1040,160,1080,192C1120,224,1160,256,1200,256C1240,256,1280,224,1320,218.7C1360,213,1400,235,1440,213.3C1480,192,1520,128,1560,90.7C1600,53,1640,43,1680,69.3C1720,96,1760,160,1800,202.7C1840,245,1880,267,1920,256C1960,245,2000,203,2040,165.3C2080,128,2120,96,2160,90.7C2200,85,2240,107,2280,144C2320,181,2360,235,2400,224C2440,213,2480,139,2520,117.3C2560,96,2600,128,2640,122.7C2680,117,2720,75,2760,74.7C2800,75,2840,117,2860,138.7L2880,160L2880,320L2860,320C2840,320,2800,320,2760,320C2720,320,2680,320,2640,320C2600,320,2560,320,2520,320C2480,320,2440,320,2400,320C2360,320,2320,320,2280,320C2240,320,2200,320,2160,320C2120,320,2080,320,2040,320C2000,320,1960,320,1920,320C1880,320,1840,320,1800,320C1760,320,1720,320,1680,320C1640,320,1600,320,1560,320C1520,320,1480,320,1440,320C1400,320,1360,320,1320,320C1280,320,1240,320,1200,320C1160,320,1120,320,1080,320C1040,320,1000,320,960,320C920,320,880,320,840,320C800,320,760,320,720,320C680,320,640,320,600,320C560,320,520,320,480,320C440,320,400,320,360,320C320,320,280,320,240,320C200,320,160,320,120,320C80,320,40,320,20,320L0,320Z"
-                    />
-                </svg> */}
-
+            <section className='relative h-[100vh] w-full flex flex-col text-white items-center justify-center bg-[linear-gradient(to_top,_black_5%,_#060010_99%)] backdrop-blur-sm'>
                 <div style={{ width: '100%', height: '100vh', position: 'absolute', top: 0, zIndex: -2 }}>
-                    <DarkVeil />
+                    <svg
+                        id="wave"
+                        viewBox="0 0 1440 490"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="transition-transform duration-300 rotate-180 w-full h-auto opacity-40"
+                    >
+                        {/* Gradient 1 */}
+                        <defs>
+                            <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+                                <stop stopColor="rgba(51.777, 0, 232.147, 0.5)" offset="0%" />
+                                <stop stopColor="rgba(189.419, 11, 255, 0.5)" offset="100%" />
+                            </linearGradient>
+                        </defs>
+                        <path
+                            fill="url(#sw-gradient-0)"
+                            style={{ transform: "translate(0, 0px)", opacity: 1 }}
+                            d="M0,294L60,261.3C120,229,240,163,360,114.3C480,65,600,33,720,24.5C840,16,960,33,1080,73.5C1200,114,1320,180,1440,179.7C1560,180,1680,114,1800,89.8C1920,65,2040,82,2160,73.5C2280,65,2400,33,2520,65.3C2640,98,2760,196,2880,236.8C3000,278,3120,261,3240,236.8C3360,212,3480,180,3600,155.2C3720,131,3840,114,3960,122.5C4080,131,4200,163,4320,220.5C4440,278,4560,359,4680,343C4800,327,4920,212,5040,138.8C5160,65,5280,33,5400,24.5C5520,16,5640,33,5760,89.8C5880,147,6000,245,6120,245C6240,245,6360,147,6480,89.8C6600,33,6720,16,6840,32.7C6960,49,7080,98,7200,171.5C7320,245,7440,343,7560,359.3C7680,376,7800,310,7920,302.2C8040,294,8160,343,8280,343C8400,343,8520,294,8580,269.5L8640,245L8640,490L0,490Z"
+                        />
+
+                        {/* Gradient 2 */}
+                        <defs>
+                            <linearGradient id="sw-gradient-1" x1="0" x2="0" y1="1" y2="0">
+                                <stop stopColor="rgba(63.545, 0, 195.718, 1)" offset="0%" />
+                                <stop stopColor="rgba(214.218, 11, 255, 0.2)" offset="100%" />
+                            </linearGradient>
+                        </defs>
+                        <path
+                            fill="url(#sw-gradient-1)"
+                            style={{ transform: "translate(0, 50px)", opacity: 0.9 }}
+                            d="M0,343L60,285.8C120,229,240,114,360,130.7C480,147,600,294,720,310.3C840,327,960,212,1080,147C1200,82,1320,65,1440,114.3C1560,163,1680,278,1800,318.5C1920,359,2040,327,2160,277.7C2280,229,2400,163,2520,114.3C2640,65,2760,33,2880,16.3C3000,0,3120,0,3240,32.7C3360,65,3480,131,3600,187.8C3720,245,3840,294,3960,318.5C4080,343,4200,343,4320,343C4440,343,4560,343,4680,318.5C4800,294,4920,245,5040,253.2C5160,261,5280,327,5400,334.8C5520,343,5640,294,5760,253.2C5880,212,6000,180,6120,196C6240,212,6360,278,6480,302.2C6600,327,6720,310,6840,253.2C6960,196,7080,98,7200,57.2C7320,16,7440,33,7560,57.2C7680,82,7800,114,7920,163.3C8040,212,8160,278,8280,269.5C8400,261,8520,180,8580,138.8L8640,98L8640,490L0,490Z"
+                        />
+
+                        {/* Gradient 3 */}
+                        <defs>
+                            <linearGradient id="sw-gradient-2" x1="0" x2="0" y1="1" y2="0">
+                                <stop stopColor="rgba(39.596, 0, 255, 0.1)" offset="0%" />
+                                <stop stopColor="rgba(255, 11, 188.317, 0.5)" offset="100%" />
+                            </linearGradient>
+                        </defs>
+                        <path
+                            fill="url(#sw-gradient-2)"
+                            style={{ transform: "translate(0, 100px)", opacity: 0.8 }}
+                            d="M0,98L60,138.8C120,180,240,261,360,269.5C480,278,600,212,720,228.7C840,245,960,343,1080,383.8C1200,425,1320,408,1440,343C1560,278,1680,163,1800,163.3C1920,163,2040,278,2160,302.2C2280,327,2400,261,2520,245C2640,229,2760,261,2880,228.7C3000,196,3120,98,3240,89.8C3360,82,3480,163,3600,228.7C3720,294,3840,343,3960,367.5C4080,392,4200,392,4320,334.8C4440,278,4560,163,4680,130.7C4800,98,4920,147,5040,171.5C5160,196,5280,196,5400,179.7C5520,163,5640,131,5760,114.3C5880,98,6000,98,6120,89.8C6240,82,6360,65,6480,81.7C6600,98,6720,147,6840,163.3C6960,180,7080,163,7200,187.8C7320,212,7440,278,7560,253.2C7680,229,7800,114,7920,106.2C8040,98,8160,196,8280,196C8400,196,8520,98,8580,49L8640,0L8640,490L0,490Z"
+                        />
+                    </svg>
                 </div>
                 <HomeText
                     text={text}
@@ -37,17 +62,22 @@ const Home = () => {
                     direction="bottom"
                     className="text-7xl inline-block"
                 />
-                <div className="mt-15 flex gap-10">
+                <div className="mt-16 flex gap-10">
                     <button className="h-12 w-40 text-lg border rounded-full font-bold bg-[linear-gradient(64deg,_rgba(2,0,36,0.5)_0%,_rgba(9,9,121,1)_30%,_rgba(0,212,255,1)_100%)] border-none">
-                        Get Start
+                        Get Started
                     </button>
                     <button className="h-12 w-40 text-lg border rounded-full font-bold">
                         Book Project
                     </button>
                 </div>
             </section>
-            <section className='h-[200vh] w-full bg-[linear-gradient(to_bottom,_black_5%,_#060010_60%,_#060010_99%)] text-white text-4xl flex flex-col items-center justify-end gap-1'>
-                <div className='w-full h-[100vh] flex justify-center items-center '>define us</div>
+            <section
+                id='about'
+                className='h-[150vh] w-full bg-[linear-gradient(to_bottom,_black_5%,_#060010_50%,_#060010_99%)] text-white overflow-hidden'
+            >
+                <About />
+            </section>
+            <section className='h-[100vh] w-full text-white text-4xl flex flex-col justify-center items-center bg-[#060010]'>
                 <h1 className=''>Why Choose us?</h1>
                 <MagicBento
                     textAutoHide={true}
@@ -61,9 +91,6 @@ const Home = () => {
                     particleCount={12}
                     glowColor="132, 0, 255"
                 />
-            </section>
-            <section id="project">
-                {/* <ProjectSlider/> */}
             </section>
         </main>
     );

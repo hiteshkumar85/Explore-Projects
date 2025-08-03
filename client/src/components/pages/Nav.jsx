@@ -55,7 +55,7 @@ const Nav = () => {
     if (scrolled) {
         return (
             <motion.div
-                className='text-white fixed top-0 h-20 w-full bg-transparent  backdrop-blur-md origin-center left-1/2 
+                className='text-white fixed top-0 h-17 w-full bg-transparent  backdrop-blur-md origin-center left-1/2 
                 transform -translate-x-1/2 overflow-hidden z-5 flex items-center justify-between px-10'
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -65,7 +65,7 @@ const Nav = () => {
                     className='relative'
                     initial={{ left: -500, opacity: 0}}
                     animate={{left: 0, opacity: 1}}
-                    transition={{duration: 1.2, ease: "easeInOut"}}
+                    transition={{duration: 1.3, ease: "easeInOut"}}
                 >
                     <Link to='/' className='text-2xl w-35 h-12 flex items-center'
                     >
@@ -76,7 +76,7 @@ const Nav = () => {
                     className='flex justify-between relative'
                     initial={{ top: -100, opacity: 0 }}
                     animate={{ top: 0, opacity: 1 }}
-                    transition={{ duration: 1.2, ease: "easeInOut" }}
+                    transition={{ duration: 1.3, ease: "easeInOut" }}
                 >
                     {links.map((link, i) => (
                         <NavLink
@@ -98,7 +98,7 @@ const Nav = () => {
                     className='bg-[#00d4ff]/60 font-bold rounded-full w-35 h-12 text-xl relative'
                     initial={{ right: -500, opacity: 0 }}
                     animate={{ left: 0, opacity: 1 }}
-                    transition={{ duration: 1.2, ease: "easeInOut" }}
+                    transition={{ duration: 1.3, ease: "easeInOut" }}
                 >Login</motion.button>
             </motion.div>
         )
