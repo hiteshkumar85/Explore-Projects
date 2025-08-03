@@ -19,8 +19,8 @@ const Home = () => {
                         {/* Gradient 1 */}
                         <defs>
                             <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
-                                <stop stopColor="rgba(51.777, 0, 232.147, 0.5)" offset="0%" />
-                                <stop stopColor="rgba(189.419, 11, 255, 0.5)" offset="100%" />
+                                <stop stopColor="rgba(51.777, 0, 232.147, 0.1)" offset="0%" />
+                                <stop stopColor="rgba(189.419, 11, 255, 0.1)" offset="100%" />
                             </linearGradient>
                         </defs>
                         <path
@@ -32,8 +32,8 @@ const Home = () => {
                         {/* Gradient 2 */}
                         <defs>
                             <linearGradient id="sw-gradient-1" x1="0" x2="0" y1="1" y2="0">
-                                <stop stopColor="rgba(63.545, 0, 195.718, 1)" offset="0%" />
-                                <stop stopColor="rgba(214.218, 11, 255, 0.2)" offset="100%" />
+                                <stop stopColor="rgba(63.545, 0, 195.718, 0.4)" offset="0%" />
+                                <stop stopColor="rgba(214.218, 11, 255, 0.01)" offset="100%" />
                             </linearGradient>
                         </defs>
                         <path
@@ -46,7 +46,7 @@ const Home = () => {
                         <defs>
                             <linearGradient id="sw-gradient-2" x1="0" x2="0" y1="1" y2="0">
                                 <stop stopColor="rgba(39.596, 0, 255, 0.1)" offset="0%" />
-                                <stop stopColor="rgba(255, 11, 188.317, 0.5)" offset="100%" />
+                                <stop stopColor="rgba(255, 11, 188.317, 0.2)" offset="100%" />
                             </linearGradient>
                         </defs>
                         <path
