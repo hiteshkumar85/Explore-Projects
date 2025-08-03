@@ -73,11 +73,11 @@ const Home = () => {
             </section>
             <section
                 id='about'
-                className='h-[150vh] w-full bg-[linear-gradient(to_bottom,_black_5%,_#060010_50%,_#060010_99%)] text-white overflow-hidden'
+                className='h-[140vh] w-full bg-[linear-gradient(to_bottom,_black_5%,_#060010_50%,_#060010_99%)] text-white overflow-hidden'
             >
                 <About />
             </section>
-            <section className='h-[100vh] w-full text-white text-4xl flex flex-col justify-center items-center bg-[#060010]'>
+            <section className='w-full text-white text-4xl flex flex-col justify-start items-center bg-[#060010]'>
                 <h1 className=''>Why Choose us?</h1>
                 <MagicBento
                     textAutoHide={true}
