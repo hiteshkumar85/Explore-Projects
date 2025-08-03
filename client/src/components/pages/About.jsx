@@ -43,7 +43,7 @@ const About = () => {
     const section = document.getElementById('vertical')
     const colLeft = document.querySelector('.col_left')
     const tl = gsap.timeline({ paused: true })
-    tl.fromTo(colLeft, { y: 10 }, { y: '70vh', duration: 1, ease: 'easeInOut' }, 0)
+    tl.fromTo(colLeft, { y: 10 }, { y: '67vh', duration: 1, ease: 'easeInOut' }, 0)
 
     ScrollTrigger.create({
       animation: tl,
