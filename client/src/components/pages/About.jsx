@@ -58,7 +58,7 @@ const About = () => {
     <section id="vertical" className="w-screen h-[150vh] py-12 ">
       <div className="w-full flex">
         <div className="w-1/2 col_left">
-          <img src={aboutImage} alt="" className='w-[90%] mx-auto rounded-xl' />
+          <img src={aboutImage} className='w-[90%] mx-auto rounded-xl' />
         </div>
         <div className="w-[40%] space-y-[50px]">
           {aboutDetail.map((about, i) => (
