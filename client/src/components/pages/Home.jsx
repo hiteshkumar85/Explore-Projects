@@ -2,6 +2,8 @@ import MagicBento from '../Animation/MagicBento.jsx';
 import About from './About.jsx';
 import Hero from './Hero.jsx';
 import Solution from './Solution.jsx';
+import FooterPage from './FooterPage.jsx';
+import Strategy from './Strategy.jsx';
 
 const Home = () => {
 
@@ -30,6 +32,9 @@ const Home = () => {
                 />
             </section>
             <Solution />
+<Strategy/>
+
+<FooterPage/>
         </main>
     );
 };
