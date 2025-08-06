@@ -103,7 +103,7 @@ const Solution = () => {
 
 
     return (
-        <section id="horizontal" className="py-20 h-[100vh] bg-[linear-gradient(to_top,_#060016_5%,_#060010_100%)] relative">
+        <section id="horizontal" className="py-25 h-full w-full bg-[linear-gradient(to_top,_#060016_5%,_#060010_100%)] relative">
             <svg
                 id="sw-js-blob-svg"
                 viewBox="0 0 100 100"
@@ -138,7 +138,7 @@ const Solution = () => {
                 <h3 className='text-4xl'>Build Smarter. Grow Faster.</h3>
                 <h1 className='text-3xl text-purple-600'>We craft digital solutions to drive results and scale with your vision.</h1>
             </div>
-            <div className="w-[95%] h-full mx-auto flex items-center horizontal__content">
+            <div className="w-[95%] h-[63vh] mx-auto flex items-end horizontal__content">
                 {services.map((service, i) => (
                     <div
                         key={i}
