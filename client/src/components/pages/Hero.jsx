@@ -1,6 +1,7 @@
 import HomeText from "../Animation/homeText.jsx";
 import { IconStarFilled, IconUsers, IconClockFilled } from '@tabler/icons-react'
 import CountUp from "react-countup";
+import Button from "./Button.jsx";
 
 const Hero = () => {
     const text = `We Build Scalable Projects\nfor the Ideas of Tomorrow`;
@@ -81,12 +82,14 @@ const Hero = () => {
                 className="text-7xl inline-block"
             />
             <div className="mt-16 flex gap-10">
-                <button className="h-12 w-40 text-lg border rounded-full font-bold bg-[linear-gradient(64deg,_rgba(2,0,36,0.5)_0%,_rgba(9,9,121,1)_30%,_rgba(0,212,255,1)_100%)] border-none">
+                {/* <button className="h-12 w-40 text-lg border rounded-full font-bold bg-[linear-gradient(64deg,_rgba(2,0,36,0.5)_0%,_rgba(9,9,121,1)_30%,_rgba(0,212,255,1)_100%)] border-none">
                     Get Started
-                </button>
-                <button className="h-12 w-40 text-lg border rounded-full font-bold">
+                </button> */}
+                {/* <button className="h-12 w-40 text-lg border rounded-full font-bold">
                     Book Project
-                </button>
+                </button> */}
+                <Button text="get started" />
+                <Button text="book project"/>
             </div>
             <div className="w-fit bg-black absolute bottom-0 py-8 px-4 md:px-20">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-10 text-white">
