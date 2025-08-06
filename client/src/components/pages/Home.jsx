@@ -30,15 +30,8 @@ const Home = () => {
                     glowColor="132, 0, 255"
                 />
             </section>
-<<<<<<< HEAD
             <Solution/>
             <Project/>
-=======
-            <Solution />
-            <section className='h-[100vh] w-full bg-black'>
-                project
-            </section>
->>>>>>> 3681a2e3eff4edd6bf5faf36e60d0536bdbb39b0
         </main>
     );
 };
