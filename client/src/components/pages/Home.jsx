@@ -6,7 +6,7 @@ import Solution from './Solution.jsx';
 const Home = () => {
 
     return (
-        <main className='h-full overflow-y-scroll no-scrollbar scroll-smooth'>
+        <main className='h-full overflow-y-scroll no-scrollbar scroll-smooth bg-black'>
             <Hero />
             <section
                 id='about'
@@ -30,6 +30,9 @@ const Home = () => {
                 />
             </section>
             <Solution />
+            <section className='h-[100vh] w-full bg-black'>
+                project
+            </section>
         </main>
     );
 };
