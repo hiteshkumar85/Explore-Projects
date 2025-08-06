@@ -1,6 +1,7 @@
 import MagicBento from '../Animation/MagicBento.jsx';
 import About from './About.jsx';
 import Hero from './Hero.jsx';
+import Project from './Project.jsx';
 import Solution from './Solution.jsx';
 
 const Home = () => {
@@ -29,7 +30,8 @@ const Home = () => {
                     glowColor="132, 0, 255"
                 />
             </section>
-            <Solution />
+            <Solution/>
+            <Project/>
         </main>
     );
 };

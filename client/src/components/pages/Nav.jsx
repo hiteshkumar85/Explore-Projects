@@ -9,6 +9,7 @@ import {
 } from "@tabler/icons-react";
 import { motion } from 'framer-motion';
 import { Link, NavLink } from 'react-router-dom'
+import Button from './Button';
 
 const Nav = () => {
     const links = [
@@ -94,12 +95,12 @@ const Nav = () => {
 
                     ))}
                 </motion.nav>
-                <motion.button
-                    className='bg-[#00d4ff]/60 font-bold rounded-full w-35 h-12 text-xl relative'
+                <motion.div
+                    className='relative'
                     initial={{ right: -500, opacity: 0 }}
                     animate={{ left: 0, opacity: 1 }}
                     transition={{ duration: 1.3, ease: "easeInOut" }}
-                >Login</motion.button>
+                ><Button text='login'/></motion.div>
             </motion.div>
         )
     } else {
