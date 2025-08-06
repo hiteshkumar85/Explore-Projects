@@ -32,15 +32,13 @@ const Home = () => {
                     glowColor="132, 0, 255"
                 />
             </section>
-<<<<<<< HEAD
-            <Solution />
-<Strategy/>
 
-<FooterPage/>
-=======
             <Solution/>
             <Project/>
->>>>>>> 8d15089e52144d876db289aa7f02cfa0a3d13937
+
+<Strategy/>
+<FooterPage/>
+
         </main>
     );
 };
