@@ -1,12 +1,15 @@
 import MagicBento from '../Animation/MagicBento.jsx';
 import About from './About.jsx';
 import Hero from './Hero.jsx';
+import Project from './Project.jsx';
 import Solution from './Solution.jsx';
+import FooterPage from './FooterPage.jsx';
+import Strategy from './Strategy.jsx';
 
 const Home = () => {
 
     return (
-        <main className='h-full overflow-y-scroll no-scrollbar scroll-smooth'>
+        <main className='h-full overflow-y-scroll no-scrollbar scroll-smooth bg-black'>
             <Hero />
             <section
                 id='about'
@@ -29,7 +32,12 @@ const Home = () => {
                     glowColor="132, 0, 255"
                 />
             </section>
+
             <Solution />
+            <Project />
+            <Strategy />
+            <FooterPage />
+
         </main>
     );
 };
