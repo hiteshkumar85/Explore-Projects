@@ -60,17 +60,17 @@ const Strategy = () => {
       icon: <FaSearch className="text-3xl mr-2" />,
     },
     {
-      title: "Development Sprint",
-      text: "Our developers build your solution using agile methodologies with regular progress updates.",
-      direction: "right",
-      highlight: true,
-      icon: <FaCode className="text-3xl mr-2" />,
-    },
-    {
       title: "Design & Prototyping",
       text: "Our designers create intuitive, beautiful interfaces that align with your brand and user needs.",
-      direction: "left",
+      direction: "right",
       icon: <FaPencilRuler className="text-3xl mr-2" />,
+    },
+    {
+      title: "Development Sprint",
+      text: "Our developers build your solution using agile methodologies with regular progress updates.",
+      direction: "left",
+      highlight: false,
+      icon: <FaCode className="text-3xl mr-2" />,
     },
     {
       title: "Testing & QA",
