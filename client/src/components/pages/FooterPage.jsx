@@ -1,11 +1,10 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function FooterPage() {
   return (
     <>
-      <div className="h-[100vh] flex justify-between p-8 w-full bg-black">
-        <div className=" w-1/2 p-4  ">
+      <div className="h-[90vh] flex justify-between p-8 w-full bg-black">
+        <div className=" w-1/2">
           <h1 className=" text-stone-200 text-7xl  justify-items-end  pl-[1.7em] pt-[2.5em]">
             Have an idea? <br />
             We can help.
@@ -43,7 +42,7 @@ function FooterPage() {
             </Link>
           </div>
         </div>
-        <div class=" flex justify-between w-[50em] h-[700px] p-8 ">
+        <div class=" flex justify-between w-1/2 h-[600px]">
           <div className="w-[400px] h-[300px]  mt-[180px] p-3 ml-[50px] ">
             <h2 class="text-amber-50 text-4xl  ">INDIA</h2>
             <h3 className=" text-amber-50 text-2xl mt-[15px]">

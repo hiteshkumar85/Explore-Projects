@@ -33,11 +33,10 @@ const Home = () => {
                 />
             </section>
 
-            <Solution/>
-            <Project/>
-
-<Strategy/>
-<FooterPage/>
+            <Solution />
+            <Project />
+            <Strategy />
+            <FooterPage />
 
         </main>
     );
