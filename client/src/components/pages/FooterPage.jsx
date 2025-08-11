@@ -42,9 +42,9 @@ function FooterPage() {
             </Link>
           </div>
         </div>
-        <div class=" flex justify-between w-1/2 h-[600px]">
+        <div className=" flex justify-between w-1/2 h-[600px]">
           <div className="w-[400px] h-[300px]  mt-[180px] p-3 ml-[50px] ">
-            <h2 class="text-amber-50 text-4xl  ">INDIA</h2>
+            <h2 className="text-amber-50 text-4xl  ">INDIA</h2>
             <h3 className=" text-amber-50 text-2xl mt-[15px]">
               19-Civil line,
               <br /> Moradabad-244001
@@ -52,7 +52,7 @@ function FooterPage() {
           </div>
 
           <div className=" w-[400px] h-[300px]  mt-[180px] p-3 ">
-            <h2 class=" text-amber-50 text-4xl">INDIA</h2>
+            <h2 className=" text-amber-50 text-4xl">INDIA</h2>
             <h3 className=" text-amber-50 text-2xl mt-[15px]">
               19-civil line,
               <br /> Dhampur -24676
@@ -62,8 +62,8 @@ function FooterPage() {
       </div>
       {/* left side area of footer section part 2 */}
       <div className="bg-[linear-gradient(to_top,_#060016_5%,_#060010_100%)]  relative  text-[#C0C0C0] flex  w-full h-[62vh] p-8">
-        <div class="w-1/2 mt-[50px] ml-[56px] p-4  ">
-          <h2 class="text-2xl  text-gray-700 ">Services</h2>
+        <div className="w-1/2 mt-[50px] ml-[56px] p-4  ">
+          <h2 className="text-2xl  text-gray-700 ">Services</h2>
           <div className="flex  gap-4 items-center mt-[10px] ">
             <Link className="text-[16px] mt-[10px]   relative inline-block  font-medium after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-800 hover:after:w-full">
               Web Development
@@ -124,8 +124,8 @@ function FooterPage() {
 
         {/* right side area of footer section part 2 */}
 
-        <div class="w-1/2 mt-[50px] ml-[56px] p-4  ">
-          <h2 class=" text-2xl  text-gray-700 ">Industries</h2>
+        <div className="w-1/2 mt-[50px] ml-[56px] p-4  ">
+          <h2 className=" text-2xl  text-gray-700 ">Industries</h2>
 
           <div className="flex gap-5">
             <Link className="text-[16px]  mt-[10px]  relative inline-block  font-medium after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-800 hover:after:w-full">
@@ -158,7 +158,7 @@ function FooterPage() {
               Gaming
             </Link>
           </div>
-          <h2 class=" text-2xl mt-[2.5em] text-gray-700 ">Company</h2>
+          <h2 className=" text-2xl mt-[2.5em] text-gray-700 ">Company</h2>
           <div className="flex gap-5">
             <Link className="text-[16px]  mt-[10px]  relative inline-block  font-medium after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-800 hover:after:w-full">
               About us
