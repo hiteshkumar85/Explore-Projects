@@ -7,12 +7,12 @@ function FooterPage() {
       <div className="min-h-[90vh] flex flex-col md:flex-row justify-between p-6 md:p-8 w-full bg-black">
         {/* Left Column */}
         <div className="w-full md:w-1/2 flex flex-col items-start">
-          <h1 className="text-stone-200 text-4xl sm:text-5xl lg:text-7xl pl-4 pt-10 sm:pt-[2.5em]">
+          <h1 className="text-stone-200 text-4xl sm:text-5xl lg:text-7xl pl-10 pt-10 sm:pt-[2.5em]">
             Have an idea? <br />
             We can help.
           </h1>
           <div className="flex items-center mt-6 sm:mt-[30px]">
-            <div className="sm:pl-[1.7em]">
+            <div className="sm:pl-[2em]">
               <Button text="Get Started" />
             </div>
 
@@ -118,7 +118,6 @@ function FooterPage() {
           </div>
         </div>
       </div>
-
     </>
   );
 }

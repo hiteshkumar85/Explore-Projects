@@ -62,9 +62,7 @@ const Nav = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
             >
-                {/* Logo */}
                 <Link to="/" className="text-2xl font-bold">logo</Link>
-                {/* Desktop Menu */}
                 <nav className="hidden md:flex space-x-10">
                     {links.map((link, i) => (
                         <NavLink
@@ -82,14 +80,12 @@ const Nav = () => {
                     ))}
                 </nav>
 
-                {/* Mobile Menu Button */}
                 <div className="md:hidden flex items-center">
                     <button onClick={() => setMenuOpen(!menuOpen)}>
                         {menuOpen ? <HiX size={28} /> : <HiMenu size={28} />}
                     </button>
                 </div>
 
-                {/* Mobile Dropdown */}
                 <AnimatePresence>
                     {menuOpen && (
                         <motion.div
@@ -118,9 +114,6 @@ const Nav = () => {
         return (
             <Dock
                 items={links}
-                panelHeight={68}
-                baseItemSize={50}
-                magnification={70}
             />
         )
     }

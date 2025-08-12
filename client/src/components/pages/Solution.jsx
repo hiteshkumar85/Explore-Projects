@@ -101,7 +101,7 @@ const Solution = () => {
     }, [])
 
     return (
-        <section id="horizontal" className="py-30  w-full bg-[linear-gradient(to_top,_#060016_5%,_#060010_100%)] relative">
+        <section id="horizontal" className="py-30 lg:py-25 w-full bg-[linear-gradient(to_top,_#060016_5%,_#060010_100%)] relative">
             <svg
                 id="sw-js-blob-svg"
                 viewBox="0 0 100 100"
@@ -136,7 +136,7 @@ const Solution = () => {
                 <h3 className='text-2xl xs:text-4xl lg:text-4xl'>Build Smarter. Grow Faster.</h3>
                 <h1 className='text-md px-6 xs:text-2xl text-purple-600'>We craft digital solutions to drive results and scale with your vision.</h1>
             </div>
-            <div className="w-[95%] h-[50vh] xs:h-[63vh] mx-auto flex items-end horizontal__content overflow-hidden px-2 py-2">
+            <div className="w-[95%] h-[50vh] xs:h-[63vh] mx-auto flex items-end horizontal__content overflow-hidden px-2 py-2 lg:mt-5">
                 {services.map((service, i) => (
                     <div
                         key={i}

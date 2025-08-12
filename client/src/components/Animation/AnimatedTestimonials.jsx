@@ -22,9 +22,9 @@ export const AnimatedTestimonials = ({ testimonials, autoplay = false }) => {
         What our clients say?
       </h1>
 
-      <div className="max-w-5xl grid md:grid-cols-2 gap-10 md:gap-20 font-sans">
+      <div className="max-w-4xl grid md:grid-cols-2 gap-10 md:gap-20 font-sans">
         {/* Image Section */}
-        <div className="relative h-64 sm:h-60 md:h-90">
+        <div className="relative h-64 xs:h-80 md:h-90">
           <AnimatePresence>
             {testimonials.map((t, i) => {
               const isActive = i === active;

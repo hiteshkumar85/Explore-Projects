@@ -141,7 +141,7 @@ export default function Dock({
           isHovered.set(0);
           mouseX.set(Infinity);
         }}
-        className={`${className} relative -top-20 flex items-end w-fit gap-5 rounded-xl pb-2 px-15 bg-white/1 backdrop-blur-md `}
+        className={`${className} relative -top-20 flex items-end w-fit gap-5 rounded-xl pb-2 px-5 md:px-15 bg-white/1 backdrop-blur-md `}
         animate={{ y: 100, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
         style={{ height: panelHeight }}

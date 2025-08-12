@@ -6,6 +6,7 @@ import Project from './Project.jsx';
 import Solution from './Solution.jsx';
 import FooterPage from './FooterPage.jsx';
 import Strategy from './Strategy.jsx';
+import ContactUs from './ContactUs.jsx';
 
 const Home = () => {
     const testimonials = [
@@ -74,6 +75,7 @@ const Home = () => {
             <Project />
             <Strategy />
             <AnimatedTestimonials testimonials={testimonials} />
+            <ContactUs/>
             <FooterPage />
         </main>
     );
