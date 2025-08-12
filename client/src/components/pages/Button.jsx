@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Button = ({ text = "hover me", onClick }) => {
   const [hovered, setHovered] = useState(false);
@@ -8,7 +8,7 @@ const Button = ({ text = "hover me", onClick }) => {
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative overflow-hidden rounded-full border border-white  px-8 py-4 font-extrabold uppercase text-white cursor-pointer "
+      className="relative overflow-hidden rounded-full border border-white  px-6 py-3 font-extrabold uppercase text-white cursor-pointer"
     >
       {/* Background Circle (replaces ::before) */}
       <span

@@ -100,7 +100,7 @@ const Nav = () => {
                     initial={{ right: -500, opacity: 0 }}
                     animate={{ left: 0, opacity: 1 }}
                     transition={{ duration: 1.3, ease: "easeInOut" }}
-                ><Button text='login'/></motion.div>
+                ><Button text='Book project'/></motion.div>
             </motion.div>
         )
     } else {
