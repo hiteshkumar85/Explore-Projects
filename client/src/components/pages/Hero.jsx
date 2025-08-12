@@ -26,8 +26,8 @@ const Hero = () => {
         },
     ];
     return (
-        <section className='relative h-[100vh] w-full flex flex-col text-white items-center justify-center bg-[linear-gradient(to_top,_black_5%,_#060010_99%)] backdrop-blur-sm'>
-            <div style={{ width: '100%', height: '100vh', position: 'absolute', top: 0, zIndex: -2 }}>
+        <section className='relative h-[90vh] lg:min-h-screen w-full flex flex-col text-white items-center justify-center bg-[linear-gradient(to_top,_black_5%,_#060010_99%)] backdrop-blur-sm'>
+            <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, zIndex: -2 }}>
                 <svg
                     id="wave"
                     viewBox="0 0 1440 490"
@@ -79,26 +79,34 @@ const Hero = () => {
                 delay={50}
                 animateBy="words"
                 direction="bottom"
-                className="text-7xl inline-block"
+                className="text-2xl xs:text-6xl sm:text-5xl md:text-6xl lg:text-7xl inline-block text-center -mt-40 md:mt-0"
             />
-            <div className="mt-16 flex gap-10">
-                <Button text="get started" />
+
+            {/* Buttons Section */}
+            <div className="mt-8 xs:mt-16">
+                <Button text="Get Started" />
             </div>
-            <div className="w-fit bg-black absolute bottom-0 py-8 px-4 md:px-20">
-                <div className="flex flex-col md:flex-row justify-between items-center gap-10 text-white">
+
+            {/* Stats Section */}
+            <div className="w-fit absolute bottom-0 py-6 xs:py-8 px-4 xs:px-8 md:px-20">
+                <div className="flex flex-col xs:flex-row justify-center  items-center gap-6 xs:gap-10 text-white">
                     {stats.map((item, index) => (
-                        <div key={index} className="flex items-center gap-3 border-r last:border-none pr-6 last:pr-0">
+                        <div
+                            key={index}
+                            className="flex items-center gap-3 border-b xs:border-b-0 xs:border-r border-gray-700 last:border-none pb-4 xs:pb-0 xs:pr-6 last:pr-0"
+                        >
                             {item.icon}
                             <div>
-                                <div className="text-xl font-semibold">
+                                <div className="text-lg xs:text-xl font-semibold">
                                     <CountUp
                                         end={item.value}
                                         duration={1.5}
                                         decimals={item.value % 1 !== 0 ? 1 : 0}
-                                        decimal="." />
+                                        decimal="."
+                                    />
                                     {item.suffix}
                                 </div>
-                                <div className="text-sm text-gray-300">{item.label}</div>
+                                <div className="text-xs xs:text-md text-gray-300">{item.label}</div>
                             </div>
                         </div>
                     ))}

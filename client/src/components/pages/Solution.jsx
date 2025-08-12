@@ -66,7 +66,7 @@ const Solution = () => {
         const section = document.getElementById('horizontal')
 
         gsap.to(items, {
-            xPercent: -100 * (items.length - 1),
+            xPercent: -110 * (items.length - 1),
             ease: 'power1.out',
             scrollTrigger: {
                 trigger: section,
@@ -100,10 +100,8 @@ const Solution = () => {
 
     }, [])
 
-
-
     return (
-        <section id="horizontal" className="py-25 h-full w-full bg-[linear-gradient(to_top,_#060016_5%,_#060010_100%)] relative">
+        <section id="horizontal" className="py-30  w-full bg-[linear-gradient(to_top,_#060016_5%,_#060010_100%)] relative">
             <svg
                 id="sw-js-blob-svg"
                 viewBox="0 0 100 100"
@@ -133,16 +131,16 @@ const Solution = () => {
                     style={{ transition: '0.3s' }}
                 />
             </svg>
-            <div className='text-white flex flex-col items-center gap-3'>
-                <h2 className='text-5xl text-purple-600'>OUR SERVICES</h2>
-                <h3 className='text-4xl'>Build Smarter. Grow Faster.</h3>
-                <h1 className='text-3xl text-purple-600'>We craft digital solutions to drive results and scale with your vision.</h1>
+            <div className='text-white flex flex-col items-center gap-1 lg:gap-3'>
+                <h2 className='text-2xl xs:text-4xl lg:text-5xl text-purple-600'>OUR SERVICES</h2>
+                <h3 className='text-2xl xs:text-4xl lg:text-4xl'>Build Smarter. Grow Faster.</h3>
+                <h1 className='text-md px-6 xs:text-2xl text-purple-600'>We craft digital solutions to drive results and scale with your vision.</h1>
             </div>
-            <div className="w-[95%] h-[63vh] mx-auto flex items-end horizontal__content">
+            <div className="w-[95%] h-[50vh] xs:h-[63vh] mx-auto flex items-end horizontal__content overflow-hidden px-2 py-2">
                 {services.map((service, i) => (
                     <div
                         key={i}
-                        className="horizontal__item will-change-transform min-w-[350px] max-w-[450px] h-[400px]  border border-[#fff]/20 p-8 mr-10 flex flex-col justify-center items-center text-white shadow-md rounded-2xl transition-all duration-150 cursor-pointer"
+                        className="horizontal__item will-change-transform min-w-[250px] xs:min-w-[350px] h-[300px] xs:h-[400px] border border-[#fff]/20 p-8 mr-10 flex flex-col justify-center items-center text-white shadow-md rounded-2xl transition-all duration-150 cursor-pointer"
                     >
                         <img
                             src={service.image}

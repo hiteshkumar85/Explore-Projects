@@ -93,42 +93,48 @@ const Strategy = () => {
   ];
 
   return (
-    <div className="bg-[linear-gradient(to_bottom,_#060022_5%,__#060028_95%)] text-white py-10 min-h-screen">
+    <div className="bg-[linear-gradient(to_bottom,_#060022_5%,__#060028_95%)] text-white py-1 min-h-screen">
       <section className="text-center max-w-4xl mx-auto my-14 px-4">
-        <h1 className="text-5xl font-bold mb-4">Where Vision Meets Execution</h1>
+        <h1 className="text-4xl lg:text-5xl font-bold mb-4">Where Vision Meets Execution</h1>
         <p className="text-lg text-gray-300">
           At the heart of our process lies a commitment to collaboration. We work as an extension
           of your team — aligning with your goals, adapting to your feedback, and ensuring every
           milestone brings your vision to life.
         </p>
       </section>
-      <div className="relative max-w-6xl mx-auto px-4">
+      <div className="relative max-w-6xl mx-auto px-10">
+        {/* Timeline line */}
         <div
           ref={lineRef}
-          className="absolute left-1/2 transform -translate-x-1/2 w-1.5 rounded-2xl bg-gradient-to-b from-purple-500 to-indigo-600"
+          className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-1.5 rounded-2xl bg-gradient-to-b from-purple-500 to-indigo-600"
           style={{ height: "0%", top: 0 }}
         ></div>
+
         {timelineItems.map((item, index) => (
           <div
             key={index}
-            className={`flex ${item.direction === "left" ? "justify-start" : "justify-end"
-              } items-center mb-20 relative`}
+            className={`flex flex-col md:flex-row ${item.direction === "left" ? "md:justify-start" : "md:justify-end"
+              } items-center mb-16 relative`}
           >
-            <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-purple-500 rounded-full top-1/2 transform -translate-y-1/2 z-1 shadow-md"></div>
+            {/* Dot */}
+            <div className="absolute -left-[1.8rem] md:left-1/2 md:-translate-x-1/2 w-4 h-4 bg-purple-500 rounded-full top-1/2 transform -translate-y-1/2 shadow-md z-10"></div>
 
+            {/* Content */}
             <div
-              className={`${item.direction === "left" ? "w-1/2 pr-8" : "w-1/2 pl-8"
+              className={`${item.direction === "left"
+                ? "w-full md:w-1/2 md:pr-8"
+                : "w-full md:w-1/2 md:pl-8"
                 }`}
             >
               <div
-                className={`timeline-box p-6 rounded-xl shadow-xl flex items-start transition duration-100 ease-in-out ${item.highlight
-                  ? "bg-gradient-to-r from-purple-900 to-indigo-500 text-white"
-                  : "bg-gradient-to-r from-purple-900 to-indigo-500 text-white"
+                className={`timeline-box p-4 md:p-6 rounded-xl shadow-xl flex items-start transition duration-100 ease-in-out ${item.highlight
+                    ? "bg-gradient-to-r from-purple-900 to-indigo-500"
+                    : "bg-gradient-to-r from-purple-900 to-indigo-500"
                   }`}
               >
                 {item.icon}
                 <div>
-                  <h3 className="text-2xl font-semibold">{item.title}</h3>
+                  <h3 className="text-xl md:text-2xl font-semibold">{item.title}</h3>
                   <p className="text-sm mt-3 leading-relaxed">{item.text}</p>
                 </div>
               </div>
@@ -136,6 +142,7 @@ const Strategy = () => {
           </div>
         ))}
       </div>
+
     </div>
   );
 };

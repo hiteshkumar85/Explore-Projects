@@ -98,7 +98,7 @@ const homeText = ({
               return (
                 <motion.span
                   className={`inline-block will-change-[transform,filter,opacity] font-bold ${segment === 'Projects' || segment === 'Ideas'
-                      ? 'text-transparent bg-clip-text bg-[linear-gradient(180deg,_rgba(250,250,250,1)_10%,_rgba(0,215,255,1)_100%)] text-shadow-lg/5 py-5'
+                      ? 'text-transparent bg-clip-text bg-[linear-gradient(180deg,_rgba(250,250,250,1)_10%,_rgba(0,215,255,1)_100%)] text-shadow-lg/5 py-2 md:py-3'
                       : ''
                     }`}
                   key={index}

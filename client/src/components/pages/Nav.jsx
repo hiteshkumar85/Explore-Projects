@@ -5,11 +5,11 @@ import {
     IconDeviceImacCode,
     IconHome,
     IconDualScreen,
-    IconBackground,
 } from "@tabler/icons-react";
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link, NavLink } from 'react-router-dom'
 import Button from './Button';
+import { HiMenu, HiX } from 'react-icons/hi';
 
 const Nav = () => {
     const links = [
@@ -44,6 +44,7 @@ const Nav = () => {
     ];
 
     const [scrolled, setScrolled] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -56,51 +57,61 @@ const Nav = () => {
     if (scrolled) {
         return (
             <motion.div
-                className='text-white fixed top-0 h-17 w-full bg-transparent  backdrop-blur-md origin-center left-1/2 
-                transform -translate-x-1/2 overflow-hidden z-5 flex items-center justify-between px-10'
+                className="text-white fixed top-0 h-15 w-full bg-transparent backdrop-blur-md z-500 flex items-center justify-between px-6 md:px-15"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
             >
-                <motion.div 
-                    className='relative'
-                    initial={{ left: -500, opacity: 0}}
-                    animate={{left: 0, opacity: 1}}
-                    transition={{duration: 1.3, ease: "easeInOut"}}
-                >
-                    <Link to='/' className='text-2xl w-35 h-12 flex items-center'
-                    >
-                        logo
-                    </Link>
-                </motion.div>
-                <motion.nav
-                    className='flex justify-between relative'
-                    initial={{ top: -100, opacity: 0 }}
-                    animate={{ top: 0, opacity: 1 }}
-                    transition={{ duration: 1.3, ease: "easeInOut" }}
-                >
+                {/* Logo */}
+                <Link to="/" className="text-2xl font-bold">logo</Link>
+                {/* Desktop Menu */}
+                <nav className="hidden md:flex space-x-10">
                     {links.map((link, i) => (
                         <NavLink
                             key={i}
                             to={link.href}
                             className={({ isActive }) =>
-                                `relative text-2xl h-12 w-40 flex items-center justify-center mx-1 transition duration-300 after:content-[''] 
-                            after:absolute after:bottom-0 after:left-[10%] after:w-[80%] after:h-[1px] after:scale-x-0 after:origin-center after:bg-white
-                            after:transition-transform after:duration-300 hover:after:scale-x-100 
-                            ${isActive ? 'after:scale-x-100' : ''}`
+                                `relative text-2xl px-2 transition duration-300 after:content-[''] 
+               after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-white 
+               after:transition-all after:duration-300 hover:after:w-full
+               ${isActive ? 'after:w-full' : ''}`
                             }
                         >
                             {link.title}
                         </NavLink>
-
                     ))}
-                </motion.nav>
-                <motion.div
-                    className='relative'
-                    initial={{ right: -500, opacity: 0 }}
-                    animate={{ left: 0, opacity: 1 }}
-                    transition={{ duration: 1.3, ease: "easeInOut" }}
-                ><Button text='Book project'/></motion.div>
+                </nav>
+
+                {/* Mobile Menu Button */}
+                <div className="md:hidden flex items-center">
+                    <button onClick={() => setMenuOpen(!menuOpen)}>
+                        {menuOpen ? <HiX size={28} /> : <HiMenu size={28} />}
+                    </button>
+                </div>
+
+                {/* Mobile Dropdown */}
+                <AnimatePresence>
+                    {menuOpen && (
+                        <motion.div
+                            initial={{ y: -100, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: -100, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="absolute top-15 left-0 w-full bg-[#060010]/90 backdrop-blur-md p-5 flex flex-col space-y-4 md:hidden"
+                        >
+                            {links.map((link, i) => (
+                                <NavLink
+                                    key={i}
+                                    to={link.href}
+                                    className="text-lg py-2 border-b border-gray-600"
+                                    onClick={() => setMenuOpen(false)}
+                                >
+                                    {link.title}
+                                </NavLink>
+                            ))}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </motion.div>
         )
     } else {
