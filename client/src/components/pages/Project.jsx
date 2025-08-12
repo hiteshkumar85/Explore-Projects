@@ -5,7 +5,7 @@ import React from 'react'
 import image1 from '../../assets/project-image/image1.jpg'
 import image2 from '../../assets/project-image/image2.jpg'
 import image3 from '../../assets/project-image/image3.jpg'
-// import image4 from '../../assets/project-image/image4.jpg'
+import image4 from '../../assets/project-image/image4.jpg'
 import { RiDoubleQuotesL } from "react-icons/ri";
 import Button from './Button'
 
@@ -57,7 +57,7 @@ const Project = () => {
                 </div>
             </div>
             <div className='page4 absolute top-[50%] right-[10%] w-[36vw] h-[90vh]  mt-[20%] ' >
-                {/* <div className='w-[100%] h-[80%]  rounded-[10px]  overflow-hidden shadow-2xl '><img src={image4} className='h-full  object-cover transition duration-300 ease-in  hover:scale-[1.05] ' /></div> */}
+                <div className='w-[100%] h-[80%]  rounded-[10px]  overflow-hidden shadow-2xl '><img src={image4} className='h-full  object-cover transition duration-300 ease-in  hover:scale-[1.05] ' /></div>
                 <div className="relative w-[100%] h-[40%] ">
                     <h3 className='font-[500] text-[20px]  mt-3'>Website for product and industrial designer who creates complete experiences</h3>
                     <span className='absolute top-[69px] left-[-16px] text-4xl text-green-600 '><RiDoubleQuotesL /></span>

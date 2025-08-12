@@ -70,10 +70,9 @@ function FooterPage() {
 
 
       {/* left side area of footer section part 2 */}
-
-      <div className="bg-[linear-gradient(to_top,_#060016_5%,_#060010_100%)]    text-[#C0C0C0] flex  w-full h-[62vh] p-8">
-        <div className="w-1/2 mt-[50px] ml-[56px] p-4  ">
-          <h2 className="text-2xl  text-gray-700 ">Services</h2>
+      <div className="bg-[linear-gradient(to_top,_#060016_5%,_#060010_100%)]  relative  text-[#C0C0C0] flex  w-full h-[62vh] p-8">
+        <div class="w-1/2 mt-[50px] ml-[56px] p-4  ">
+          <h2 class="text-2xl  text-gray-700 ">Services</h2>
           <div className="flex  gap-4 items-center mt-[10px] ">
             <Link className="text-[16px] mt-[10px]   relative inline-block  font-medium after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-800 hover:after:w-full">
               Web Development
@@ -203,3 +202,8 @@ function FooterPage() {
   );
 }
 export default FooterPage;
+
+
+
+
+
