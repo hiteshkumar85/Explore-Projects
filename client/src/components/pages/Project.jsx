@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
-import React from 'react'
-import image1 from '../../assets/image1.jpg'
-import image2 from '../../assets/image2.jpg'
-import image3 from '../../assets/image3.jpg'
-import image4 from '../../assets/image4.jpg'
+import { Link } from 'react-router-dom'
+import image1 from '../../assets/project-image/image1.jpg'
+import image2 from '../../assets/project-image/image2.jpg'
+import image3 from '../../assets/project-image/image3.jpg'
+import image4 from '../../assets/project-image/image4.jpg'
 import { RiDoubleQuotesL } from "react-icons/ri";
 import Button from './Button'
 
@@ -17,7 +17,6 @@ const projects = [
 const Project = () => {
   return (
     <section className='relative w-full bg-gradient-to-b from-[#060016] via-[#060016] to-[#060022] text-white'>
-      {/* Heading */}
       <motion.h1
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -27,14 +26,12 @@ const Project = () => {
         Our Latest Projects
       </motion.h1>
 
-      {/* Projects Grid */}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-16 px-6 md:px-20'>
         {projects.map((project, idx) => (
           <div
             key={idx}
             className={`flex flex-col ${idx % 2 === 1 ? "md:mt-40" : ""}`}
           >
-            {/* Image */}
             <div className='rounded-[10px] overflow-hidden shadow-2xl'>
               <img
                 src={project.img}
@@ -43,7 +40,6 @@ const Project = () => {
               />
             </div>
 
-            {/* Text */}
             <div className="relative mt-5">
               <h3 className='font-[500] text-[20px]'>
                 Website for product and industrial designer who creates complete experiences
@@ -62,7 +58,6 @@ const Project = () => {
         ))}
       </div>
 
-      {/* Bottom CTA */}
       <div className='mt-20 px-6 md:px-20'>
         <div className='flex flex-col md:flex-row items-center justify-between gap-6'>
           <p className='md:w-[60%] text-[17px] font-[400]'>
@@ -71,7 +66,12 @@ const Project = () => {
           </p>
           <div className='flex items-center gap-6'>
             <Button text='Get in touch' />
-            <a className='link-hover' href="#">See more work</a>
+            <Link
+              to="/portfolio"
+              className="link-hover"
+            >
+              See more work
+            </Link>
           </div>
         </div>
       </div>

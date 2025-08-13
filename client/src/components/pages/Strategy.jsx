@@ -18,15 +18,14 @@ const Strategy = () => {
   useEffect(() => {
     gsap.fromTo(
       lineRef.current,
-      { height: "10%" },
+      { height: "0%" },
       {
         height: "100%",
         scrollTrigger: {
           trigger: lineRef.current,
-          start: "top 90%",
+          start: "top 80%",
           end: "bottom bottom",
-          ease: "power1.out",
-          scrub: 1,
+          scrub: 1.5,
         },
       }
     );
@@ -42,7 +41,7 @@ const Strategy = () => {
           ease: "power3.out",
           scrollTrigger: {
             trigger: el,
-            start: "top 95%",
+            start: "top 90%",
             end: "top 20%",
             scrub: true,
           },
