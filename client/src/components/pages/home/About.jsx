@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import Lenis from '@studio-freight/lenis'
-import aboutImage from '../../assets/about.png'
+import aboutImage from '../../../assets/about.png'
 gsap.registerPlugin(ScrollTrigger)
 
 const About = () => {

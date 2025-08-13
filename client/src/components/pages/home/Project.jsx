@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import image1 from '../../assets/project-image/image1.jpg'
-import image2 from '../../assets/project-image/image2.jpg'
-import image3 from '../../assets/project-image/image3.jpg'
-import image4 from '../../assets/project-image/image4.jpg'
+import image1 from '../../../assets/project-image/image1.jpg'
+import image2 from '../../../assets/project-image/image2.jpg'
+import image3 from '../../../assets/project-image/image3.jpg'
+import image4 from '../../../assets/project-image/image4.jpg'
 import { RiDoubleQuotesL } from "react-icons/ri";
-import Button from './Button'
+import Button from '../Button'
 
 const projects = [
   { img: image1 },

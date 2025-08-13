@@ -3,12 +3,12 @@ import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
-import web from '../../assets/solutionImages/web.png'
-import andriod from '../../assets/solutionImages/andriod.png'
-import cloud_service from '../../assets/solutionImages/cloud-services.png'
-import hosting from '../../assets/solutionImages/hosting-server.png'
-import seo from '../../assets/solutionImages/seo.png'
-import uxui from '../../assets/solutionImages/UXUI-design.png'
+import web from '../../../assets/solutionImages/web.png'
+import andriod from '../../../assets/solutionImages/andriod.png'
+import cloud_service from '../../../assets/solutionImages/cloud-services.png'
+import hosting from '../../../assets/solutionImages/hosting-server.png'
+import seo from '../../../assets/solutionImages/seo.png'
+import uxui from '../../../assets/solutionImages/UXUI-design.png'
 
 import Lenis from '@studio-freight/lenis'
 const Solution = () => {

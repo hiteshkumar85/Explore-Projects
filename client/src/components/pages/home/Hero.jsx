@@ -1,7 +1,7 @@
-import HomeText from "../Animation/homeText.jsx";
+import HomeText from "../../Animation/homeText.jsx";
 import { IconStarFilled, IconUsers, IconClockFilled } from '@tabler/icons-react'
 import CountUp from "react-countup";
-import Button from "./Button.jsx";
+import Button from "../Button.jsx";
 
 const Hero = () => {
     const text = `We Build Scalable Projects\nfor the Ideas of Tomorrow`;

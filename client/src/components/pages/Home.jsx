@@ -1,12 +1,12 @@
 import MagicBento from '../Animation/MagicBento.jsx';
 import { AnimatedTestimonials } from "../Animation/AnimatedTestimonials.jsx";
-import About from './About.jsx';
-import Hero from './Hero.jsx';
-import Project from './Project.jsx';
-import Solution from './Solution.jsx';
+import About from './home/About.jsx';
+import Hero from './home/Hero.jsx';
+import Project from './home/Project.jsx';
+import Solution from './home/Solution.jsx';
 import FooterPage from './FooterPage.jsx';
-import Strategy from './Strategy.jsx';
-import ContactUs from './ContactUs.jsx';
+import Strategy from './home/Strategy.jsx';
+import ContactUs from './home/ContactUs.jsx';
 
 const Home = () => {
     const testimonials = [
