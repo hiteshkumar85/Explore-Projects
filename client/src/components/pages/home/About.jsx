@@ -29,7 +29,7 @@ const About = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 430) // Tailwind's sm breakpoint
+      setIsMobile(window.innerWidth < 425) 
     }
     handleResize()
     window.addEventListener('resize', handleResize)
@@ -85,7 +85,7 @@ const About = () => {
 
   return (
     <section id="vertical" className="w-screen py-12 px-4">
-      <div className="w-full flex flex-col sm:flex-row items-center md:items-start justify-center gap-10">
+      <div className="w-full flex flex-col sm:flex-row items-center md:items-start justify-center gap-5 md:gap-10">
 
         {/* Image Section */}
         <div className="w-full md:w-1/2 col_left">
@@ -97,7 +97,7 @@ const About = () => {
         </div>
 
         {/* Text Section */}
-        <div className="w-full md:w-[40%] space-y-10">
+        <div className="w-full md:w-[40%] space-y-5 md:space-y-10">
           {(isMobile ? aboutDetail.slice(0, 2) : aboutDetail).map((about, i) => (
             <div key={i} className="vertical__item">
               <h3 className="text-[#7500ff] text-lg md:text-xl uppercase font-bold">

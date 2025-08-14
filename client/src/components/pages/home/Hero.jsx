@@ -79,7 +79,7 @@ const Hero = () => {
                 delay={50}
                 animateBy="words"
                 direction="bottom"
-                className="text-2xl xs:text-6xl md:text-7xl inline-block text-center -mt-40 md:mt-0"
+                className="text-2xl xs:text-6xl md:text-7xl inline-block text-center -mt-30 xs:-mt-20 md:mt-0"
             />
 
             {/* Buttons Section */}

@@ -19,8 +19,8 @@ const router = createBrowserRouter([
                 element: <ProjectSection />,
             },
             {
-                path: 'solution',
-                element: <h1>solution</h1>
+                path: 'blog',
+                element: <h1>blog</h1>
             },
             {
                 path: 'dashboard',

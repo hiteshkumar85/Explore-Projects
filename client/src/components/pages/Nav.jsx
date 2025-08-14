@@ -28,11 +28,11 @@ const Nav = () => {
             href: "/portfolio",
         },
         {
-            title: "Solution",
+            title: "Blog",
             icon: (
                 <IconDeviceImacCode className="h-full w-full text-neutral-500 dark:text-neutral-300" />
             ),
-            href: "/solution",
+            href: "/blog",
         },
         {
             title: "Dashboard",

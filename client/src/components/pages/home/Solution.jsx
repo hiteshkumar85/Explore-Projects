@@ -101,7 +101,7 @@ const Solution = () => {
     }, [])
 
     return (
-        <section id="horizontal" className="py-30 lg:py-25 w-full bg-[linear-gradient(to_top,_#060016_5%,_#060010_100%)] relative">
+        <section id="horizontal" className="py-30 lg:py-20 lg:pb-10 w-full bg-[linear-gradient(to_top,_#060016_5%,_#060010_100%)] relative">
             <svg
                 id="sw-js-blob-svg"
                 viewBox="0 0 100 100"
