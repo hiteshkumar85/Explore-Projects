@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -22,11 +22,11 @@ export default function ContactUs() {
   };
 
   return (
-    <section className="py-10 text-white bg-[linear-gradient(to_top,_#060022_5%,__#060028_95%)]  ">
-      <h2 className="text-center font-bold text-4xl text-blue-500 mb-6">
+    <section className="py-10 text-white bg-[linear-gradient(to_bottom,_#060034_5%,__#060040_95%)]  ">
+      <h2 className="text-center font-bold text-5xl text-blue-500 mb-5">
           Contact Us
         </h2>
-      <div className="max-w-4xl mx-auto bg-gray-700/10 shadow-lg rounded-lg p-7 max-sm:bg-red-400 ">
+      <div className="max-w-4xl mx-auto md:bg-gray-700/10 shadow-lg rounded-lg py-5 px-10">
         <h1 className="text-center text-2xl font-bold  mb-4">
           How Can We Help You?
         </h1>
@@ -39,7 +39,7 @@ export default function ContactUs() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block mb-1 font-medium">
-                Your Name <span className="text-red-500">*</span>
+                Your Name
               </label>
               <input
                 type="text"
@@ -53,7 +53,7 @@ export default function ContactUs() {
             </div>
             <div>
               <label className="block mb-1 font-medium">
-                Your Email <span className="text-red-500">*</span>
+                Your Email
               </label>
               <input
                 type="email"
@@ -69,7 +69,7 @@ export default function ContactUs() {
 
           <div>
             <label className="block mb-1 font-medium">
-              Subject <span className="text-red-500">*</span>
+              Subject
             </label>
             <input
               type="text"
@@ -84,7 +84,7 @@ export default function ContactUs() {
 
           <div>
             <label className="block mb-1 font-medium">
-              Your Message <span className="text-red-500">*</span>
+              Your Message
             </label>
             <textarea
               name="message"

@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-const Button = ({ text = "hover me", onClick }) => {
+const div = ({ text = "hover me", onClick }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <button
+    <div
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -46,8 +46,8 @@ const Button = ({ text = "hover me", onClick }) => {
           }
         `}
       </style>
-    </button>
+    </div>
   );
 };
 
-export default Button;
+export default div;

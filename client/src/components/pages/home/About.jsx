@@ -1,12 +1,11 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import Lenis from '@studio-freight/lenis'
-import aboutImage from '../../assets/about.png'
+import aboutImage from '../../../assets/about.png'
 gsap.registerPlugin(ScrollTrigger)
 
 const About = () => {
-
   const aboutDetail = [
     {
       heading: "Who We Are?",
@@ -23,9 +22,20 @@ const About = () => {
     {
       heading: "Why Choose Us?",
       para: "We believe that great software is built on trust, collaboration, and a deep understanding of our clients' goals. Our approach combines technical expertise with a problem-solving mindset, ensuring we deliver solutions that are not just functional but impactful. By prioritizing transparency, timely delivery, and continuous support, we aim to create long-lasting partnerships that help businesses stay ahead of the curve."
-    },
+    }
+  ]
 
-  ];
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 425) 
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -38,38 +48,68 @@ const About = () => {
       ScrollTrigger.update()
       requestAnimationFrame(raf)
     }
-
     requestAnimationFrame(raf)
+
     const section = document.getElementById('vertical')
     const colLeft = document.querySelector('.col_left')
-    const tl = gsap.timeline({ paused: true })
-    tl.fromTo(colLeft, { y: 10 }, { y: '67vh', duration: 1, ease: 'easeInOut' }, 0)
 
-    ScrollTrigger.create({
-      animation: tl,
-      trigger: section,
-      start: 'top top',
-      end: 'bottom center',
-      scrub: true,
-    })
+    const mm = gsap.matchMedia()
+    mm.add(
+      {
+        isSmall: "(max-width: 639px)",
+        isLarge: "(min-width: 640px)"
+      },
+      (context) => {
+        const { isSmall, isLarge } = context.conditions
+        const tl = gsap.timeline({ paused: true })
+
+        if (isSmall) {
+          tl.fromTo(colLeft, { y: 0 }, { y: '0vh', duration: 1, ease: 'easeInOut' }, 0)
+        }
+        if (isLarge) {
+          tl.fromTo(colLeft, { y: 10 }, { y: '65vh', duration: 1, ease: 'easeInOut' }, 0)
+        }
+
+        ScrollTrigger.create({
+          animation: tl,
+          trigger: section,
+          start: 'top top',
+          end: 'bottom center',
+          scrub: true
+        })
+      }
+    )
+
+    return () => mm.revert()
   }, [])
 
   return (
-    <section id="vertical" className="w-screen h-[150vh] py-12 ">
-      <div className="w-full flex justify-center">
-        <div className="w-1/2 col_left">
-          <img src={aboutImage} className='w-[90%] rounded-xl' />
+    <section id="vertical" className="w-screen py-12 px-4">
+      <div className="w-full flex flex-col sm:flex-row items-center md:items-start justify-center gap-5 md:gap-10">
+
+        {/* Image Section */}
+        <div className="w-full md:w-1/2 col_left">
+          <img
+            src={aboutImage}
+            className="w-full lg:w-[90%] rounded-xl"
+            alt="About Us"
+          />
         </div>
-        <div className="w-[40%] space-y-[50px]">
-          {aboutDetail.map((about, i) => (
+
+        {/* Text Section */}
+        <div className="w-full md:w-[40%] space-y-5 md:space-y-10">
+          {(isMobile ? aboutDetail.slice(0, 2) : aboutDetail).map((about, i) => (
             <div key={i} className="vertical__item">
-              <h3 className="text-[#7500ff] text-[20px] uppercase font-bold">{about.heading}</h3>
-              <p className="mt-2">
+              <h3 className="text-[#7500ff] text-lg md:text-xl uppercase font-bold">
+                {about.heading}
+              </h3>
+              <p className="mt-2 text-sm md:text-base leading-relaxed">
                 {about.para}
               </p>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   )
