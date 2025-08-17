@@ -4,6 +4,9 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './components/pages/Home'
 import ProjectSection from './components/pages/Project/ProjectSection.jsx' 
+import { h1 } from 'framer-motion/client'
+import Dashbord from './components/Dahbord/Dashbord.jsx'
+import Project from './components/Dahbord/DashbordPage/Project.jsx'
 
 
 const router = createBrowserRouter([
@@ -15,6 +18,8 @@ const router = createBrowserRouter([
   },
 
 //  END
+
+
     {
         path: '/',
         element: <App />,
@@ -33,7 +38,17 @@ const router = createBrowserRouter([
             },
             {
                 path: 'dashboard',
-                element: <h1>dashboard</h1>
+                element: <Dashbord />,
+                children:[
+{path:'projects',
+element: <Project />}
+
+                ]
+
+
+
+
+
             },
             
 

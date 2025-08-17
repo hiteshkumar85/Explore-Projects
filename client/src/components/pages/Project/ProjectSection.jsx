@@ -1,5 +1,4 @@
 
-
 import React, { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -17,6 +16,8 @@ import Mobile_three from "../../../assets/project-image/Mobile_project_image/Mob
 // uiux
 import UIUX_one from "../../../assets/project-image/UIUX_Design_project_image/UIUX_one.jpg";
 import UIUX_two from "../../../assets/project-image/UIUX_Design_project_image/UIUX_two.jpg";
+
+
 
 const categories = {
   all: [{ id: "all", label: "All" }],
@@ -61,8 +62,10 @@ function ProjectSection() {
       <section className="min-h-screen w-full bg-gradient-to-t from-[#060016] to-[#060010] px-4 sm:px-6  lg:px-10 py-8">
         
         {/* Navigation Bar */}
+
         <div className="flex justify-between items-center border-b border-[#786f80] pb-2 mb-8">
           {/* Desktop Links */}
+          
           <div className="hidden sm:flex gap-6">
             {navLinks.map((link) => (
               <button
@@ -151,5 +154,4 @@ function ProjectSection() {
     </>
   );
 }
-
 export default ProjectSection;
