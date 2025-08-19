@@ -555,7 +555,7 @@ const MagicBento = ({
             padding: 0.5rem;
           }
           
-          @media (min-width: 600px) {
+          @media (min-width: 425px) {
             .card-responsive {
               grid-template-columns: repeat(2, 1fr);
             }
@@ -643,7 +643,7 @@ const MagicBento = ({
             text-overflow: ellipsis;
           }
           
-          @media (max-width: 599px) {
+          @media (max-width: 425px) {
             .card-responsive {
               grid-template-columns: 1fr;
               width: 90%;

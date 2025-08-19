@@ -59,7 +59,7 @@ function ProjectSection() {
 
       </h1>
 
-      <section className="min-h-screen w-full bg-gradient-to-t from-[#060016] to-[#060010] px-4 sm:px-6  lg:px-10 py-8">
+      <section className="min-h-screen w-full bg-gradient-to-t from-[#060016] to-[#060010] px-4 sm:px-6  lg:px-15 py-8">
         
         {/* Navigation Bar */}
 
@@ -140,7 +140,7 @@ function ProjectSection() {
               {/* Content */}
               <div className="p-5 flex flex-col flex-grow">
                 <span className="text-[#a3aabe] text-sm mb-1">{project.Type}</span>
-                <Link to="/" className="hover:underline">
+                <Link to="/" className="">
                   <h2 className="text-white text-xl font-semibold mb-2">{project.title}</h2>
                 </Link>
                 <p className="text-[#d1d5db] text-sm leading-relaxed">
