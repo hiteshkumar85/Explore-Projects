@@ -1,13 +1,20 @@
 const express = require('express');
-const app = express();
-const port = 3000;
+const dotenv = require('dotenv');
+const connectDB = require('./dbconnection');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+dotenv.config();
 
-app.use(express.json());
+const app = express();
+connectDB();
+
+app.use(cors());
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.send('Hitesh bhai or kitne hint doge');
+  res.send('backend is running');
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on http://localhost:${process.env.PORT || 5000}`);
 });
