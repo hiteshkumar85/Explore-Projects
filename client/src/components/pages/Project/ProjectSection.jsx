@@ -29,49 +29,94 @@ const categories = {
 };
 
 const projects = [
-  { id: 1, title: "E-commerce", Dis: "Lorem ipsum dolor sit amet consectetur adipiscing elit.", Type: "Web application", category: "web", img: Web_one },
-  { id: 2, title: "E-commerce", Type: "Web application", category: "web", img: Web_two },
-  { id: 3, title: "E-commerce", Type: "Web application", category: "web", img: Web_three },
-  { id: 4, title: "Mobile Banking", Type: "Android application", category: "app", img: Mobile_one },
-  { id: 5, title: "Mobile Banking", Type: "Android application", category: "app", img: Mobile_two },
-  { id: 6, title: "Mobile Banking", Type: "Android application", category: "app", img: Mobile_three },
-  { id: 7, title: "Dashboard", Type: "UI/UX Design", category: "uiux", img: UIUX_one },
-  { id: 8, title: "Dashboard", Type: "UI/UX Design", category: "uiux", img: UIUX_two },
+  {
+    id: 1,
+    title: "E-commerce",
+    Dis: "Lorem ipsum dolor sit amet consectetur adipiscing elit.",
+    Type: "Web application",
+    category: "web",
+    img: Web_one,
+  },
+  {
+    id: 2,
+    title: "E-commerce",
+    Type: "Web application",
+    category: "web",
+    img: Web_two,
+  },
+  {
+    id: 3,
+    title: "E-commerce",
+    Type: "Web application",
+    category: "web",
+    img: Web_three,
+  },
+  {
+    id: 4,
+    title: "Mobile Banking",
+    Type: "Android application",
+    category: "app",
+    img: Mobile_one,
+  },
+  {
+    id: 5,
+    title: "Mobile Banking",
+    Type: "Android application",
+    category: "app",
+    img: Mobile_two,
+  },
+  {
+    id: 6,
+    title: "Mobile Banking",
+    Type: "Android application",
+    category: "app",
+    img: Mobile_three,
+  },
+  {
+    id: 7,
+    title: "Dashboard",
+    Type: "UI/UX Design",
+    category: "uiux",
+    img: UIUX_one,
+  },
+  {
+    id: 8,
+    title: "Dashboard",
+    Type: "UI/UX Design",
+    category: "uiux",
+    img: UIUX_two,
+  },
 ];
 
 function ProjectSection() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const filteredProjects = activeCategory === "all"
-    ? projects
-    : projects.filter((p) => p.category === activeCategory);
+  const filteredProjects =
+    activeCategory === "all"
+      ? projects
+      : projects.filter((p) => p.category === activeCategory);
 
   const navLinks = [...categories.all, ...categories.projects];
 
   return (
     <>
-      {/* Title */}
-      <h1 className="text-4xl sm:text-5xl lg:text-[80px] pt-5 px-4 sm:px-6 text-[#786f80] bg-gradient-to-t from-[#060016] to-[#060010]">
-      our projects
-
-      <h2 className="text-4xl lg:mt-[30px] lg:ml-[60px] sm:text-5xl lg:text-[110px] pt-5 px-4 sm:px-6 text-[#786f80] bg-gradient-to-t from-[#060016] to-[#060010]">  Helping businesses achieve goals. Solving people’s problems.</h2>
-
-      </h1>
-
-      <section className="min-h-screen w-full bg-gradient-to-t from-[#060016] to-[#060010] px-4 sm:px-6  lg:px-15 py-8">
-        
+      <section className="min-h-screen w-full bg-gradient-to-t from-[#060016] to-[#060010] px-4 sm:px-6  lg:px-30 py-50">
+        <div className="flex flex-col gap-4 mb-15">
+          <h1 className="text-[24px] text-[#ffffffc7]">Our projects</h1>
+          <h2 className="text-[84px] leading-25  font-[600]  text-[#ffffff]">
+            Helping businesses achieve <br /> goals. Solving people’s problems.
+          </h2>
+        </div>
         {/* Navigation Bar */}
-
         <div className="flex justify-between items-center border-b border-[#786f80] pb-2 mb-8">
           {/* Desktop Links */}
-          
           <div className="hidden sm:flex gap-6">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => setActiveCategory(link.id)}
-                className={`relative pb-1 text-base transition-colors duration-200 ${
+                className={`relative pb-1 text-[18px] transition-colors duration-200 ${
                   activeCategory === link.id
                     ? "text-white"
                     : "text-[#a3aabe] hover:text-[#d1d5db] cursor-pointer"
@@ -125,7 +170,7 @@ function ProjectSection() {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="bg-[#0f0a1a]  rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl 
+              className="bg-[#0f0a1a]  rounded-[10px] overflow-hidden shadow-lg hover:shadow-2xl 
                          transition-transform duration-300 flex flex-col hover:-translate-y-2"
             >
               {/* Image Zoom Effect */}
@@ -139,9 +184,13 @@ function ProjectSection() {
 
               {/* Content */}
               <div className="p-5 flex flex-col flex-grow">
-                <span className="text-[#a3aabe] text-sm mb-1">{project.Type}</span>
+                <span className="text-[#a3aabe] text-sm mb-1">
+                  {project.Type}
+                </span>
                 <Link to="/" className="">
-                  <h2 className="text-white text-xl font-semibold mb-2">{project.title}</h2>
+                  <h2 className="text-white text-xl font-semibold mb-2">
+                    {project.title}
+                  </h2>
                 </Link>
                 <p className="text-[#d1d5db] text-sm leading-relaxed">
                   {project.Dis || "No description available."}
