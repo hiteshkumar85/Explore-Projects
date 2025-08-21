@@ -1,2 +1,3 @@
 /*    /index.html   200
 /api/*     https://explore-projects.onrender.com/api/:splat     200
+/public/*  https://explore-projects.onrender.com/public/:splat  200
