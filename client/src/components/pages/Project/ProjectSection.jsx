@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import axios from "axios"; 
+import axios from "../../../api/axiosInstance"; 
 
 const categories = {
   all: [{ id: "all", label: "All" }],
