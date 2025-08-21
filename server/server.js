@@ -9,20 +9,7 @@ const app = express();
 
 connectDB();
 app.use(
-  cors({
-    origin: (origin, callback) => {
-      const allowedOrigins = [
-        'https://team4dev.netlify.app',
-        'http://localhost:5173',
-      ];
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true,
-  })
+  cors()
 );
 
 app.use(express.json());
