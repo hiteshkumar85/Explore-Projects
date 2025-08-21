@@ -3,10 +3,8 @@ const connectDB = require('./dbconnection');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
-const app = express();
 require('dotenv').config();
-
-app.use("/public", express.static(path.join(__dirname, "public")));
+const app = express();
 connectDB();
 
 app.use(cors({
@@ -16,6 +14,9 @@ app.use(cors({
   ],
   credentials: true
 }));
+
+app.use("/public", express.static(path.join(__dirname, "public")));
+
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
