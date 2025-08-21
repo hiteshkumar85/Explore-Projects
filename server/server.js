@@ -9,7 +9,10 @@ const app = express();
 
 connectDB();
 app.use(
-  cors()
+  cors({
+    origin: ['https://team4dev.netlify.app'],
+    credentials: true,
+  })
 );
 
 app.use(express.json());
