@@ -9,7 +9,13 @@ require('dotenv').config();
 app.use("/public", express.static(path.join(__dirname, "public")));
 connectDB();
 
-app.use(cors({origin: 'https://team4dev.netlify.app',credentials: true}));
+app.use(cors({
+  origin: [
+    'https://team4dev.netlify.app',
+    'http://localhost:5173'
+  ],
+  credentials: true
+}));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {

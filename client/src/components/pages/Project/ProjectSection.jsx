@@ -236,7 +236,6 @@ function ProjectSection() {
     };
 
     fetchProjects();
-    
   }, []);
 
   const filteredProjects =
