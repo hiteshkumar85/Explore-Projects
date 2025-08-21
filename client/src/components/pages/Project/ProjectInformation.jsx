@@ -23,7 +23,7 @@ const ProjectInformation = () => {
 
     return (
         <div>
-            <img src={`http://localhost:5000/public/project-images/${project.image}.jpg`} alt="" />
+            <img src={`https://explore-projects.onrender.com/public/project-images/${project.image}.jpg`} alt="" />
             <h1> project title : {project.title}</h1>
             <p> project description : {project.description}</p>
             <h2>project type : {project.Type}</h2>
