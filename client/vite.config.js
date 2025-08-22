@@ -6,8 +6,15 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [tailwindcss(), react()],
   server: {
-    proxy: {
-      '/api': 'http://localhost:5000',
-    }
-  }
-})
+  proxy: {
+    "/api": {
+      target: "https://explore-projects.onrender.com",
+      changeOrigin: true,
+    },
+    "/public": {
+      target: "https://explore-projects.onrender.com",
+      changeOrigin: true,
+    },
+  },
+}
+});
