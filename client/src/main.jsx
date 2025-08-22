@@ -4,7 +4,6 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/pages/Home";
 import ProjectSection from "./components/pages/Project/ProjectSection.jsx";
-
 import MainDashbord from "./components/Dahbord/MainDashbord.jsx";
 import Project from "./components/Dahbord/Projects/Project.jsx";
 import Client from "./components/Dahbord/Client/Client.jsx";
@@ -15,6 +14,7 @@ import UserManagement from "./components/Dahbord/DashbordPage/UserManagement.jsx
 import Notification from "./components/Dahbord/DashbordPage/Notification.jsx";
 import DevelopmantToolkit from "./components/Dahbord/DashbordPage/DevelopmantToolkit.jsx";
 import Dashboard from "./components/Dahbord/DashbordPage/Dashbord.jsx";
+import LoginPage from "./components/Dahbord/Login-Page/LoginPage.jsx";
 
 const router = createBrowserRouter([
   // ALL PROJECT / Project Section COMPONENT START
@@ -38,32 +38,26 @@ const router = createBrowserRouter([
       },
       {
         path: "blog",
-        element: <h1>blog</h1>,
+        element: <LoginPage />,
       },
+
       {
         path: "/dashboard",
         element: <MainDashbord />,
 
         children: [
 
-          
-          {path:"", element:<Dashboard/>},
-          
-        
-
+          { path: "Dashbord", element: <Dashboard /> },
 
           { path: "projects", element: <Project /> },
 
-
-
-          { path: "clients", element: <Client/> },
-          { path: "reports", element: <Report/> },
-          {path: "services", element: <Service/>},
-          { path: "Notification", element: <Notification/> },
-          {path: "industry-analysis", element: <IndustryAnalysis/> },
-          {path: "user-management", element: <UserManagement/>},
-          {path:"developmant-toolkit", element:<DevelopmantToolkit/>}
-
+          { path: "clients", element: <Client /> },
+          { path: "reports", element: <Report /> },
+          { path: "services", element: <Service /> },
+          { path: "Notification", element: <Notification /> },
+          { path: "industry-analysis", element: <IndustryAnalysis /> },
+          { path: "user-management", element: <UserManagement /> },
+          { path: "developmant-toolkit", element: <DevelopmantToolkit /> },
         ],
       },
     ],
