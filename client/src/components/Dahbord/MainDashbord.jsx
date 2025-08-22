@@ -30,7 +30,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   const menuItems = [
-    { to: " ", label: "Dashboard", icon: <FaChartBar /> },
+    { to: "", label: "Dashboard", icon: <FaChartBar /> },
     { to: "projects", label: "Projects", icon: <FaFolderOpen /> },
     { to: "clients", label: "Clients", icon: <FaUsers /> },
     { to: "reports", label: "Reports", icon: <FaChartBar /> },
@@ -113,6 +113,7 @@ export default function Dashboard() {
                         <NavLink
                           key={sub.to}
                           to={sub.to}
+                          end
                           className={({ isActive }) =>
                             `flex items-center gap-3 px-3 py-2 rounded-lg transition ${
                               isActive
@@ -132,6 +133,7 @@ export default function Dashboard() {
                 <NavLink
                   key={item.to}
                   to={item.to}
+                  end
                   className={({ isActive }) =>
                     `flex items-center gap-3 px-3 py-2 rounded-lg transition ${
                       isActive

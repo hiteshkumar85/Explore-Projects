@@ -14,16 +14,8 @@ import UserManagement from "./components/Dahbord/DashbordPage/UserManagement.jsx
 import Notification from "./components/Dahbord/DashbordPage/Notification.jsx";
 import DevelopmantToolkit from "./components/Dahbord/DashbordPage/DevelopmantToolkit.jsx";
 import Dashboard from "./components/Dahbord/DashbordPage/Dashbord.jsx";
-import LoginPage from "./components/Dahbord/Login-Page/LoginPage.jsx";
 
 const router = createBrowserRouter([
-  // ALL PROJECT / Project Section COMPONENT START
-  {
-    path: "/Project/ProjecSection",
-    element: <ProjectSection />,
-  },
-
-  //  END
   {
     path: "/",
     element: <App />,
@@ -37,27 +29,37 @@ const router = createBrowserRouter([
         element: <ProjectSection />,
       },
       {
-        path: "blog",
-        element: <LoginPage />,
+        path: "portfolio/project-information",
+        element: <ProjectInformation />,
       },
-
+      {
+        path: "blog",
+        element: <h1>blog</h1>,
+      },
       {
         path: "/dashboard",
         element: <MainDashbord />,
 
         children: [
 
-          { path: "Dashbord", element: <Dashboard /> },
+          
+          {path:"", element:<Dashboard/>},
+          
+        
+
 
           { path: "projects", element: <Project /> },
 
-          { path: "clients", element: <Client /> },
-          { path: "reports", element: <Report /> },
-          { path: "services", element: <Service /> },
-          { path: "Notification", element: <Notification /> },
-          { path: "industry-analysis", element: <IndustryAnalysis /> },
-          { path: "user-management", element: <UserManagement /> },
-          { path: "developmant-toolkit", element: <DevelopmantToolkit /> },
+
+
+          { path: "clients", element: <Client/> },
+          { path: "reports", element: <Report/> },
+          {path: "services", element: <Service/>},
+          { path: "Notification", element: <Notification/> },
+          {path: "industry-analysis", element: <IndustryAnalysis/> },
+          {path: "user-management", element: <UserManagement/>},
+          {path:"developmant-toolkit", element:<DevelopmantToolkit/>}
+
         ],
       },
     ],
