@@ -5,17 +5,18 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/pages/Home";
 import ProjectSection from "./components/pages/Project/ProjectSection.jsx";
 
-import MainDashbord from "./components/Dahbord/MainDashbord.jsx";
-import Project from "./components/Dahbord/Projects/Project.jsx";
-import Client from "./components/Dahbord/Client/Client.jsx";
-import Report from "./components/Dahbord/DashbordPage/Report.jsx";
-import Service from "./components/Dahbord/DashbordPage/Service.jsx";
-import IndustryAnalysis from "./components/Dahbord/DashbordPage/IndustryAnalysis.jsx";
-import UserManagement from "./components/Dahbord/DashbordPage/UserManagement.jsx";
-import Notification from "./components/Dahbord/DashbordPage/Notification.jsx";
-import DevelopmantToolkit from "./components/Dahbord/DashbordPage/DevelopmantToolkit.jsx";
-import Dashboard from "./components/Dahbord/DashbordPage/Dashbord.jsx";
+import MainDashbord from "./components/Dashbord/MainDashbord.jsx";
+import Project from "./components/Dashbord/Projects/Project.jsx";
+import Client from "./components/Dashbord/Client/Client.jsx";
+import Report from "./components/Dashbord/Report/Report.jsx";
+import Service from "./components/Dashbord/Service/Service.jsx";
+import IndustryAnalysis from "./components/Dashbord/IndustryAnalysis/IndustryAnalysis.jsx";
+import UserManagement from "./components/Dashbord/UserManagement/UserManagement.jsx";
+import Notification from "./components/Dashbord/Notification/Notification.jsx";
+import DevelopmantToolkit from "./components/Dashbord/DevelopmentToolkit/DevelopmantToolkit.jsx";
+import Dashboard from "./components/Dashbord/Dashbord/Dashbord.jsx";
 import ProjectInformation from "./components/pages/Project/ProjectInformation.jsx";
+import LoginPage from "./components/Dashbord/LoginPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path: "blog",
-        element: <h1>blog</h1>,
+        element: <LoginPage/>,
       }
     ],
   },
