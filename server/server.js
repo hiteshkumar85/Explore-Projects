@@ -1,10 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const connectDB = require('./dbconnection');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
-require('dotenv').config();
 
 app.use("/public", express.static(path.join(__dirname, "public")));
 connectDB();
