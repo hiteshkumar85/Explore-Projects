@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 const ProjectInformation = () => {
   const { scrollYProgress } = useScroll();
   // Image zoom while scrolling Page 2
-  const scale = useTransform(scrollYProgress, [0.3, 0.6], [1, 1.2]);
+  const scale = useTransform(scrollYProgress, [0.1, 0.3], [1, 1.12]);
 
   const id = useLocation().search.split("?")[1];
   const [project, setProject] = useState(null);
@@ -46,13 +46,12 @@ const ProjectInformation = () => {
           viewport={{ once: true }}
 
         >
-          <h1 className="text-3xl">Title</h1>
+          <h1 className="text-3xl">{project.logo || 'LOGO'}</h1>
           <h1 className="text-[51px] font-bold mb-4">
-            Lonely Walls: Fine art marketplace and artist networking app
+            {project.heading}
           </h1>
           <p className="text-lg leading-relaxed px-60">
-            Lonely Walls is a Seattle-based startup that came up with a mobile
-            app idea to help local artists find venues to exhibit their art.
+            {project.paragraph}
           </p>
         </motion.div>
       </section>
@@ -64,7 +63,7 @@ const ProjectInformation = () => {
           style={{ scale }}
         >
           <img
-            src={`http://localhost:5000/public/project-images/${project.image}.jpg`}
+            src={`http://localhost:5000/public/project-images/${project.images[0]}.jpg`}
             alt="Background"
             className="h-[100vh] w-[100vw] object-cover"
           />
@@ -72,7 +71,7 @@ const ProjectInformation = () => {
       </section>
 
       {/* Page 3 overlapping the fixed image */}
-      <section className="relative z-20 h-[85vh] bg-[#000] flex items-center justify-center flex-col gap-20">
+      <section className="relative z-20 h-[100vh] bg-[#000000] flex items-center justify-center flex-col gap-20">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -84,10 +83,7 @@ const ProjectInformation = () => {
           <div className="w-[62%]  flex flex-col gap-3 ">
             <h3>Every wall has a story to tell</h3>
             <p className="text-[18px] leading-7 w-[100%] font-[400]">
-              The idea of an art platform that would directly connect artists
-              with collectors and business owners came to Charles Doyon after
-              years in the photography and tech industry. Lonely Walls became a
-              bold project that touched upon a business model few did.
+              {project.description}
             </p>
           </div>
         </motion.div>
@@ -101,14 +97,11 @@ const ProjectInformation = () => {
           <h1>Mission</h1>
           <div className="w-[62%]  flex flex-col gap-3 ">
             <p className="text-[18px] leading-7 w-[100%] font-[400]">
-              Lonely Walls believes art should be for everyone and that artists
-              deserve to make a living wage from their creations. With that in
-              mind, Lonely Walls has a mission to completely disrupt the art
-              market and flip it on its head. Any public space becomes an art
-              venue.
+              {project.mission}
             </p>
           </div>
         </motion.div>
+        {/* <h1 className="text-white">link {project.link}</h1> */}
       </section>
     </>
   );
