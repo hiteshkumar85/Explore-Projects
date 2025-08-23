@@ -1,10 +1,8 @@
-import React from "react";
-
 function LoginPage() {
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-gray-950 via-purple-950 to-black p-6">
-        <div className="w-full max-w-lg min-h-[600px] bg-gradient-to-b from-gray-900/80 to-gray-800/70 backdrop-blur-xl rounded-3xl shadow-2xl p-12 border border-purple-800/40 flex flex-col justify-center">
+        <div className="w-full max-w-lg min-h-[550px] bg-gradient-to-b from-gray-900/80 to-gray-800/70 backdrop-blur-xl rounded-3xl shadow-2xl p-10 border border-purple-800/40 flex flex-col justify-center">
           <h2 className="text-5xl font-extrabold text-center text-purple-300 mb-10 tracking-wide drop-shadow-lg">
             Login
           </h2>
