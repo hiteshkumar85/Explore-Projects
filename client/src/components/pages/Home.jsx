@@ -76,7 +76,7 @@ const Home = () => {
             <Strategy />
             <AnimatedTestimonials testimonials={testimonials} />
             <ContactUs/>
-            <FooterPage />
+            
         </main>
     );
 };
