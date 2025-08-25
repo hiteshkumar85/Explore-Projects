@@ -110,7 +110,7 @@ const ProjectInformation = () => {
           <span className="text-cyan-400">⚙</span> Technology Stack
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 max-w-5xl mx-auto">
-          {project.technologies.map((tech, index) => (
+          {project.technologies.map((elem, index) => (
             <div
               key={index}
               className="flex flex-col items-center text-center space-y-2 p-6 rounded-xl 
@@ -119,9 +119,8 @@ const ProjectInformation = () => {
                        hover:shadow-cyan-500/40 hover:shadow-lg hover:bg-[#1a2332]
                        cursor-pointer duration-300"
             >
-              {tech.icon}
-              <h3 className="text-white font-medium">{tech}</h3>
-              <p className="text-gray-400 text-sm">{tech}</p>
+              <h3 className="text-white font-medium">{elem.tech}</h3>
+              <p className="text-gray-400 text-sm">{elem.des}</p>
             </div>
           ))}
         </div>

@@ -9,6 +9,6 @@ const App = () => {
       <Outlet />
       <FooterPage/>
     </> 
-)
+  )
 }
 export default App
