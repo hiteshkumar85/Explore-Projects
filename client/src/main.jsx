@@ -4,19 +4,19 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/pages/Home";
 import ProjectSection from "./components/pages/Project/ProjectSection.jsx";
-
-import MainDashbord from "./components/Dashbord/MainDashbord.jsx";
-import Project from "./components/Dashbord/Projects/Project.jsx";
-import Client from "./components/Dashbord/Client/Client.jsx";
-import Report from "./components/Dashbord/Report/Report.jsx";
-import Service from "./components/Dashbord/Service/Service.jsx";
-import IndustryAnalysis from "./components/Dashbord/IndustryAnalysis/IndustryAnalysis.jsx";
-import UserManagement from "./components/Dashbord/UserManagement/UserManagement.jsx";
-import Notification from "./components/Dashbord/Notification/Notification.jsx";
-import DevelopmantToolkit from "./components/Dashbord/DevelopmentToolkit/DevelopmantToolkit.jsx";
-import Dashboard from "./components/Dashbord/Dashbord/Dashbord.jsx";
+import MainDashbord from "./components/Dashboard/MainDashboard.jsx";
+import Project from "./components/Dashboard/Projects/Project.jsx";
+import Client from "./components/Dashboard/Client/Client.jsx";
+import Report from "./components/Dashboard/Report/Report.jsx";
+import Service from "./components/Dashboard/Service/Service.jsx";
+import IndustryAnalysis from "./components/Dashboard/IndustryAnalysis/IndustryAnalysis.jsx";
+import Manager from "./components/Dashboard/UserManagement/Manager/Manager.jsx";
+import Notification from "./components/Dashboard/Notification/Notification.jsx";
+import DevelopmantToolkit from "./components/Dashboard/DevelopmentToolkit/DevelopmantToolkit.jsx";
+import Dashboard from "./components/Dashboard/Dashboard/Dashboard.jsx";
 import ProjectInformation from "./components/pages/Project/ProjectInformation.jsx";
-import LoginPage from "./components/Dashbord/LoginPage.jsx";
+import LoginPage from "./components/Dashboard/LoginPage.jsx";
+import Employ from "./components/Dashboard/UserManagement/Employ.jsx";
 
 const router = createBrowserRouter([
   {
@@ -78,8 +78,11 @@ const router = createBrowserRouter([
         element: <IndustryAnalysis />
       },
       {
-        path: "user-management",
-        element: <UserManagement />
+        path: "manager",
+        element: <Manager />,
+      },
+      {path: "employ", 
+        element: <Employ/>
       },
       {
         path: "developmant-toolkit",
