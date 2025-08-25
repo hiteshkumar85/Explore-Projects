@@ -35,8 +35,11 @@ const ProjectInformation = () => {
             <h3>mission: {project.mission}</h3>
             <h1>link: {project.link}</h1>
             <div className="flex gap-3">
-                technology : {project.technologies.map((tech, i) => (
-                    <h1 key={i}>{tech}</h1>
+                technology : {project.technologies.map((technology, i) => (
+                    <>
+                        <h1 key={i}>{technology.tech}</h1>
+                        <h2>{technology.des}</h2>
+                    </>
                 ))}
             </div>
         </div>
