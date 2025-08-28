@@ -18,6 +18,9 @@ import ProjectInformation from "./components/pages/Project/ProjectInformation.js
 import LoginPage from "./components/Dashboard/LoginPage.jsx";
 import Employ from "./components/Dashboard/UserManagement/Employ.jsx";
 
+// useNavigate
+import ManagerForm from "./components/Dashboard/UserManagement/Manager/ManagerForm.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,12 +41,12 @@ const router = createBrowserRouter([
       {
         path: "blog",
         element: <h1>blog</h1>,
-      }
+      },
     ],
   },
   {
     path: "/dashboard/login",
-    element: <LoginPage /> 
+    element: <LoginPage />,
   },
   {
     path: "/dashboard",
@@ -51,45 +54,50 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Dashboard />
+        element: <Dashboard />,
       },
       {
         path: "projects",
-        element: <Project />
+        element: <Project />,
       },
       {
         path: "clients",
-        element: <Client />
+        element: <Client />,
       },
       {
         path: "reports",
-        element: <Report />
+        element: <Report />,
       },
       {
         path: "services",
-        element: <Service />
+        element: <Service />,
       },
       {
         path: "Notification",
-        element: <Notification />
+        element: <Notification />,
       },
       {
         path: "industry-analysis",
-        element: <IndustryAnalysis />
+        element: <IndustryAnalysis />,
       },
       {
         path: "manager",
         element: <Manager />,
+
+        // children: [],
+
+
       },
-      {path: "employ", 
-        element: <Employ/>
-      },
+
+      { path: "employ", element: <Employ /> },
       {
         path: "developmant-toolkit",
-        element: <DevelopmantToolkit />
-      }
+        element: <DevelopmantToolkit />,
+      },
     ],
   },
+  { path: "add-manager", element: <ManagerForm /> },
+  
 ]);
 
 createRoot(document.getElementById("root")).render(
