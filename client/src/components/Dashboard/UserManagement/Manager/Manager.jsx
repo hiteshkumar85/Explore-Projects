@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { FaSearch, FaEye, FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 import ManagerForm from "./ManagerForm";
-import ManagerDetails from "./ManagerDetails";
 
 export default function ManagerDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -13,43 +12,48 @@ export default function ManagerDashboard() {
       name: "Arjun Sharma",
       email: "arjun.sharma@example.com",
       type: "Project Manager",
+      status: "Active",
     },
     {
       id: "M002",
       name: "Priya Verma",
       email: "priya.verma@example.com",
       type: "Client Manager",
+      status: "Inactive",
     },
     {
       id: "M003",
       name: "Rahul Mehta",
       email: "rahul.mehta@example.com",
       type: "Operations Manager",
+      status: "Active",
     },
     {
       id: "M004",
       name: "Sneha Kapoor",
       email: "sneha.kapoor@example.com",
       type: "HR Manager",
+      status: "Active",
     },
     {
       id: "M005",
       name: "Vikas Yadav",
       email: "vikas.yadav@example.com",
       type: "Tech Manager",
+      status: "Inactive",
     },
     {
       id: "M006",
       name: "Aditi Singh",
       email: "aditi.singh@example.com",
       type: "Finance Manager",
+      status: "Active",
     },
   ]);
 
   const [showForm, setShowForm] = useState(false);
-  const [selectedManager, setSelectedManager] = useState(null);
   const [editId, setEditId] = useState(null);
-  const [editData, setEditData] = useState({ name: "", type: "" });
+  const [editData, setEditData] = useState({ name: "", type: "", status: "" });
 
   // 🔹 Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -60,7 +64,8 @@ export default function ManagerDashboard() {
     (m) =>
       m.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
       m.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      m.type.toLowerCase().includes(searchTerm.toLowerCase())
+      m.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      m.status.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // 🔹 Slice data for pagination
@@ -82,13 +87,20 @@ export default function ManagerDashboard() {
 
   const startEdit = (m) => {
     setEditId(m.id);
-    setEditData({ name: m.name, type: m.type });
+    setEditData({ name: m.name, type: m.type, status: m.status });
   };
 
   const saveEdit = (id) => {
     setManagers(
       managers.map((m) =>
-        m.id === id ? { ...m, name: editData.name, type: editData.type } : m
+        m.id === id
+          ? {
+              ...m,
+              name: editData.name,
+              type: editData.type,
+              status: editData.status,
+            }
+          : m
       )
     );
     setEditId(null);
@@ -103,28 +115,21 @@ export default function ManagerDashboard() {
           <FaSearch className="text-slate-400 mr-2" />
           <input
             type="text"
-            placeholder="Search by ID, Name, or Type"
+            placeholder="Search by ID, Name, Type or Status"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="outline-none w-full text-sm bg-transparent text-slate-700"
           />
         </div>
 
-
-
-
         {/* Add new manager */}
-
-      
-<button
-  onClick={() => window.open("/add-manager", "_blank")}
-  className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition text-white px-5 py-2 rounded-full shadow-md"
->
-  <FaPlus />
-  <span className="hidden sm:inline">Add Manager</span>
-</button>
-
-
+        <button
+          onClick={() => window.open("/add-manager", "_blank")}
+          className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition text-white px-5 py-2 rounded-full shadow-md"
+        >
+          <FaPlus />
+          <span className="hidden sm:inline">Add Manager</span>
+        </button>
       </div>
 
       {/* Table Card */}
@@ -136,6 +141,7 @@ export default function ManagerDashboard() {
               <th className="px-6 py-4 text-left font-semibold">Name</th>
               <th className="px-6 py-4 text-left font-semibold">Email</th>
               <th className="px-6 py-4 text-left font-semibold">Type</th>
+              <th className="px-6 py-4 text-left font-semibold">Status</th>
               <th className="px-6 py-4 text-center font-semibold">Actions</th>
             </tr>
           </thead>
@@ -179,6 +185,32 @@ export default function ManagerDashboard() {
                   )}
                 </td>
 
+                {/* Editable Status */}
+                <td className="px-6 py-4">
+                  {editId === m.id ? (
+                    <select
+                      value={editData.status}
+                      onChange={(e) =>
+                        setEditData({ ...editData, status: e.target.value })
+                      }
+                      className="border border-slate-200 px-2 py-1 rounded-lg w-full text-sm shadow-sm focus:ring-2 focus:ring-indigo-500"
+                    >
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                    </select>
+                  ) : (
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        m.status === "Active"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      {m.status}
+                    </span>
+                  )}
+                </td>
+
                 {/* Actions */}
                 <td className="px-6 py-4 text-center">
                   {editId === m.id ? (
@@ -199,7 +231,9 @@ export default function ManagerDashboard() {
                   ) : (
                     <div className="flex justify-center gap-4 text-slate-500">
                       <button
-                        onClick={() => setSelectedManager(m)}
+                        onClick={() =>
+                          window.open(`/managerdetails`, "_blank") // 🔹 Opens new page for View
+                        }
                         className="hover:text-green-600 transition"
                       >
                         <FaEye />
@@ -261,14 +295,6 @@ export default function ManagerDashboard() {
       {/* Form Modal */}
       {showForm && (
         <ManagerForm onClose={() => setShowForm(false)} onAdd={addManager} />
-      )}
-
-      {/* View Modal */}
-      {selectedManager && (
-        <ManagerDetails
-          manager={selectedManager}
-          onClose={() => setSelectedManager(null)}
-        />
       )}
     </div>
   );

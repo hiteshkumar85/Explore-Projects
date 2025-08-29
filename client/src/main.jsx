@@ -10,7 +10,6 @@ import Client from "./components/Dashboard/Client/Client.jsx";
 import Report from "./components/Dashboard/Report/Report.jsx";
 import Service from "./components/Dashboard/Service/Service.jsx";
 import IndustryAnalysis from "./components/Dashboard/IndustryAnalysis/IndustryAnalysis.jsx";
-import Manager from "./components/Dashboard/UserManagement/Manager/Manager.jsx";
 import Notification from "./components/Dashboard/Notification/Notification.jsx";
 import DevelopmantToolkit from "./components/Dashboard/DevelopmentToolkit/DevelopmantToolkit.jsx";
 import Dashboard from "./components/Dashboard/Dashboard/Dashboard.jsx";
@@ -18,9 +17,11 @@ import ProjectInformation from "./components/pages/Project/ProjectInformation.js
 import LoginPage from "./components/Dashboard/LoginPage.jsx";
 import Employ from "./components/Dashboard/UserManagement/Employ.jsx";
 
-// useNavigate
-import ManagerForm from "./components/Dashboard/UserManagement/Manager/ManagerForm.jsx";
 
+// Manager Components
+import Manager from "./components/Dashboard/UserManagement/Manager/Manager.jsx";
+import ManagerForm from "./components/Dashboard/UserManagement/Manager/ManagerForm.jsx";
+import ManagerDetails from "./components/Dashboard/UserManagement/Manager/ManagerDetails.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -97,6 +98,7 @@ const router = createBrowserRouter([
     ],
   },
   { path: "add-manager", element: <ManagerForm /> },
+  {path:"managerdetails", element: <ManagerDetails /> }
   
 ]);
 
