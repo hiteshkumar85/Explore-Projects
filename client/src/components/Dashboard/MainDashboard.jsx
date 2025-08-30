@@ -261,8 +261,8 @@ function MainDashboard() {
       label: "Services",
       icon: <FaTools />,
       submenu: [
-        { to: "services/client-rating", label: "Client Rating", icon: <FaStar /> },
-        { to: "services/project-showcase", label: "Project Showcase", icon: <FaLaptopCode /> },
+        { to: "services/clientrating", label: "Client Rating", icon: <FaStar /> },
+        { to: "services/projectshowcase", label: "Project Showcase", icon: <FaLaptopCode /> },
         { to: "services/blog", label: "Blog", icon: <FaBlog /> },
         { to: "services/solutions", label: "Solutions", icon: <FaLightbulb /> },
       ],
@@ -274,7 +274,7 @@ function MainDashboard() {
       icon: <FaUsers />,
       submenu: [
         { to: "manager", label: "Manager", icon: <FaUsers /> },
-        { to: "employ", label: "Employee", icon: <FaUsers /> },
+        { to: "employee", label: "Employee", icon: <FaUsers /> },
       ],
     },
     { to: "developmant-toolkit", label: "Development Toolkit", icon: <FaCogs /> },

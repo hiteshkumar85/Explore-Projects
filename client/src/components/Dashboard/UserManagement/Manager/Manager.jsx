@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { FaSearch, FaEye, FaEdit, FaTrash, FaPlus } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import ManagerForm from "./ManagerForm";
 
 export default function ManagerDashboard() {
@@ -49,6 +50,27 @@ export default function ManagerDashboard() {
       type: "Finance Manager",
       status: "Active",
     },
+    {
+      id: "M007",
+      name: "Aditi Singh",
+      email: "aditi.singh@example.com",
+      type: "Finance Manager",
+      status: "Active",
+    },
+       {
+      id: "M008",
+      name: "Aditi Singh",
+      email: "aditi.singh@example.com",
+      type: "Finance Manager",
+      status: "Active",
+    },
+       {
+      id: "M009",
+      name: "Aditi Singh",
+      email: "aditi.singh@example.com",
+      type: "Finance Manager",
+      status: "Active",
+    },
   ]);
 
   const [showForm, setShowForm] = useState(false);
@@ -57,7 +79,7 @@ export default function ManagerDashboard() {
 
   // 🔹 Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const managersPerPage = 3;
+  const managersPerPage = 5;
 
   // 🔹 Filter managers by search
   const filteredManagers = managers.filter(
@@ -105,11 +127,31 @@ export default function ManagerDashboard() {
     );
     setEditId(null);
   };
+  const navigate = useNavigate();
 
   return (
-    <div className="p-6">
+    <div className="p-5">
+        {/* Task Summary Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="bg-white rounded-lg shadow-md p-13 border-l-4 border-blue-500">
+          <h2 className="text-xl font-semibold text-gray-700">Total Manager</h2>
+          <p className="text-4xl font-bold text-blue-600 mt-2"></p>
+        </div>
+        <div className="bg-white rounded-lg shadow-md p-13 border-l-4 border-red-700">
+          <h2 className="text-xl font-semibold text-gray-700">Active Manager</h2>
+          <p className="text-4xl font-bold text-yellow-600 mt-2"></p>
+        </div>
+        <div className="bg-white rounded-lg shadow-md p-13 border-l-4 border-green-500">
+          <h2 className="text-xl font-semibold text-gray-700">InActive Manager</h2>
+          <p className="text-4xl font-bold text-green-600 mt-2"></p>
+        </div>
+        <div className="bg-white rounded-lg shadow-md p-13 border-l-4 border-purple-500">
+          <h2 className="text-xl font-semibold text-gray-700">Active Tasks</h2>
+          <p className="text-4xl font-bold text-purple-600 mt-2"></p>
+        </div>
+      </div>
       {/* Top bar */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-2">
         {/* Search bar */}
         <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-md w-80">
           <FaSearch className="text-slate-400 mr-2" />
@@ -123,13 +165,18 @@ export default function ManagerDashboard() {
         </div>
 
         {/* Add new manager */}
+
+
         <button
-          onClick={() => window.open("/add-manager", "_blank")}
+            onClick={() => navigate("/add-manager")}
           className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition text-white px-5 py-2 rounded-full shadow-md"
         >
           <FaPlus />
           <span className="hidden sm:inline">Add Manager</span>
         </button>
+
+
+
       </div>
 
       {/* Table Card */}
@@ -231,9 +278,8 @@ export default function ManagerDashboard() {
                   ) : (
                     <div className="flex justify-center gap-4 text-slate-500">
                       <button
-                        onClick={() =>
-                          window.open(`/managerdetails`, "_blank") // 🔹 Opens new page for View
-                        }
+                        
+                        onClick={() => navigate("/managerdetails")}
                         className="hover:text-green-600 transition"
                       >
                         <FaEye />

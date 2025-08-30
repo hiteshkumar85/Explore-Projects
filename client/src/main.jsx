@@ -8,20 +8,24 @@ import MainDashbord from "./components/Dashboard/MainDashboard.jsx";
 import Project from "./components/Dashboard/Projects/Project.jsx";
 import Client from "./components/Dashboard/Client/Client.jsx";
 import Report from "./components/Dashboard/Report/Report.jsx";
-import Service from "./components/Dashboard/Service/Service.jsx";
 import IndustryAnalysis from "./components/Dashboard/IndustryAnalysis/IndustryAnalysis.jsx";
 import Notification from "./components/Dashboard/Notification/Notification.jsx";
 import DevelopmantToolkit from "./components/Dashboard/DevelopmentToolkit/DevelopmantToolkit.jsx";
 import Dashboard from "./components/Dashboard/Dashboard/Dashboard.jsx";
 import ProjectInformation from "./components/pages/Project/ProjectInformation.jsx";
 import LoginPage from "./components/Dashboard/LoginPage.jsx";
-import Employ from "./components/Dashboard/UserManagement/Employ.jsx";
-
+import Employee from "./components/Dashboard/UserManagement/Employee/Employee.jsx";
 
 // Manager Components
 import Manager from "./components/Dashboard/UserManagement/Manager/Manager.jsx";
 import ManagerForm from "./components/Dashboard/UserManagement/Manager/ManagerForm.jsx";
 import ManagerDetails from "./components/Dashboard/UserManagement/Manager/ManagerDetails.jsx";
+
+// Service Components
+import Solutions from "./components/Dashboard/Service/Solutions.jsx";
+import Blog from "./components/Dashboard/Service/Blog.jsx";
+import ClientRating from "./components/Dashboard/Service/ClientRating.jsx";
+import ProjectShowCase from "./components/Dashboard/Service/ProjectShowCase.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,10 +42,6 @@ const router = createBrowserRouter([
       {
         path: "portfolio/project-information",
         element: <ProjectInformation />,
-      },
-      {
-        path: "blog",
-        element: <h1>blog</h1>,
       },
     ],
   },
@@ -69,10 +69,25 @@ const router = createBrowserRouter([
         path: "reports",
         element: <Report />,
       },
+
+
+      //  service routes start here
+      { path: "services/clientrating", element: <ClientRating /> },
       {
-        path: "services",
-        element: <Service />,
+        path: "services/solutions",
+        element: <Solutions />,
       },
+      {
+        path: "services/blog",
+        element: <Blog />,
+      },
+      {
+        path: "services/projectshowcase",
+        element: <ProjectShowCase />,
+      },
+      //  service routes end here
+
+
       {
         path: "Notification",
         element: <Notification />,
@@ -85,12 +100,9 @@ const router = createBrowserRouter([
         path: "manager",
         element: <Manager />,
 
-        // children: [],
-
-
       },
 
-      { path: "employ", element: <Employ /> },
+      { path: "employee", element: <Employee /> },
       {
         path: "developmant-toolkit",
         element: <DevelopmantToolkit />,
@@ -98,8 +110,7 @@ const router = createBrowserRouter([
     ],
   },
   { path: "add-manager", element: <ManagerForm /> },
-  {path:"managerdetails", element: <ManagerDetails /> }
-  
+  { path: "managerdetails", element: <ManagerDetails /> },
 ]);
 
 createRoot(document.getElementById("root")).render(
