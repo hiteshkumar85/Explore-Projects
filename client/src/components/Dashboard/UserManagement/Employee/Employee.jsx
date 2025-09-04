@@ -11,7 +11,8 @@ import {
   FaPlus,
   FaCheck,
   FaTimes,
-} from "react-icons/fa";
+} 
+from "react-icons/fa";
 
 function Employee() {
   const [searchTerm, setSearchTerm] = useState("");

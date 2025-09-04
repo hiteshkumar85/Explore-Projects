@@ -10,7 +10,7 @@ import Client from "./components/Dashboard/Client/Client.jsx";
 import Report from "./components/Dashboard/Report/Report.jsx";
 import IndustryAnalysis from "./components/Dashboard/IndustryAnalysis/IndustryAnalysis.jsx";
 import Notification from "./components/Dashboard/Notification/Notification.jsx";
-import DevelopmantToolkit from "./components/Dashboard/DevelopmentToolkit/DevelopmantToolkit.jsx";
+import Workspace from "./components/Dashboard/WorkSpace/Workspace.jsx";
 import Dashboard from "./components/Dashboard/Dashboard/Dashboard.jsx";
 import ProjectInformation from "./components/pages/Project/ProjectInformation.jsx";
 import LoginPage from "./components/Dashboard/LoginPage.jsx";
@@ -70,7 +70,6 @@ const router = createBrowserRouter([
         element: <Report />,
       },
 
-
       //  service routes start here
       { path: "services/clientrating", element: <ClientRating /> },
       {
@@ -87,7 +86,6 @@ const router = createBrowserRouter([
       },
       //  service routes end here
 
-
       {
         path: "Notification",
         element: <Notification />,
@@ -99,13 +97,12 @@ const router = createBrowserRouter([
       {
         path: "manager",
         element: <Manager />,
-
       },
 
       { path: "employee", element: <Employee /> },
       {
-        path: "developmant-toolkit",
-        element: <DevelopmantToolkit />,
+        path: "WorkSpace",
+        element: <Workspace />,
       },
     ],
   },
