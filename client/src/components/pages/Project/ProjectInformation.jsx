@@ -49,7 +49,7 @@ const ProjectInformation = () => {
           style={{ scale }}
         >
           <img
-            src={`http://localhost:5000/public/project-images/${project.images[0]}.jpg`}
+            src={`/public/project-images/${project.images[0]}.jpg`}
             alt="Background"
             className="h-[100vh] w-[100vw] object-cover"
           />
@@ -90,21 +90,12 @@ const ProjectInformation = () => {
       <section className="relative h-[100vh] bg-black  flex items-center justify-center  ">
         <motion.div>
           <img
-            src={`http://localhost:5000/public/project-images/${project.images[1]}.jpg`}
+            src={`/public/project-images/${project.images[1]}.jpg`}
             alt="Background"
             className="h-[92vh] w-[92vw] object-cover rounded-xl shadow-xl shadow-gray-800 "
           />
         </motion.div>
       </section>
-      {/* <section className="bg-red-900 text-white h-[50vh] flex  justify-center ">
-        <h1>link: {project.link}</h1> 
-         <div className="flex gap-3 ">
-          <h1>Technology : </h1>  {" "}
-          {project.technologies.map((tech, i) => (
-            <div key={i}>{tech}</div>
-          ))}
-        </div>
-      </section> */}
       <section className="bg-[#000000] py-16">
         <h2 className="text-white text-2xl font-semibold mb-10 text-center flex items-center justify-center gap-3">
           <span className="text-cyan-400">⚙</span> Technology Stack
