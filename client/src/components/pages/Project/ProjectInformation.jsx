@@ -11,6 +11,7 @@ const ProjectInformation = () => {
   const id = useLocation().search.split("?")[1];
   const [project, setProject] = useState(null);
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchProject = async () => {
       try {
         const response = await axios.get(`/api/projectInformation/${id}`);

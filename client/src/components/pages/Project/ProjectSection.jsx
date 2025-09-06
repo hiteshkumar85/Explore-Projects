@@ -20,6 +20,7 @@ function ProjectSection() {
 
   // Fetch projects from backend
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchProjects = async () => {
       try {
         const res = await axios.get("/api/projects");
