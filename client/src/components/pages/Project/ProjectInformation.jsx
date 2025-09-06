@@ -49,7 +49,7 @@ const ProjectInformation = () => {
           style={{ scale }}
         >
           <img
-            src={`/public/project-images/${project.images[0]}.jpg`}
+            src={`https://explore-projects.onrender.com/public/project-images/${project.images[0]}.jpg`}
             alt="Background"
             className="h-[100vh] w-[100vw] object-cover"
           />
@@ -90,7 +90,7 @@ const ProjectInformation = () => {
       <section className="relative h-[100vh] bg-black  flex items-center justify-center  ">
         <motion.div>
           <img
-            src={`/public/project-images/${project.images[1]}.jpg`}
+            src={`https://explore-projects.onrender.com/public/project-images/${project.images[1]}.jpg`}
             alt="Background"
             className="h-[92vh] w-[92vw] object-cover rounded-xl shadow-xl shadow-gray-800 "
           />

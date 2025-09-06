@@ -118,7 +118,7 @@ function ProjectSection() {
               {/* Image Zoom Effect */}
               <div className="overflow-hidden">
                 <img
-                  src={`/public/project-images/${project.images[0]}.jpg`}
+                  src={`https://explore-projects.onrender.com/public/project-images/${project.images[0]}.jpg`}
                   alt={project.title}
                   className="w-full h-55 object-cover transition-transform duration-500 ease-in-out hover:scale-105"
                 />
