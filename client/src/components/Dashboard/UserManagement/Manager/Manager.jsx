@@ -1,6 +1,4 @@
-
-
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -60,7 +58,6 @@ function Manager() {
     },
   ]);
 
-  const [showForm, setShowForm] = useState(false);
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState({ name: "", type: "", status: "" });
 
@@ -101,11 +98,11 @@ function Manager() {
       Manager.map((M) =>
         M.id === id
           ? {
-              ...M,
-              name: editData.name,
-              type: editData.type,
-              status: editData.status,
-            }
+            ...M,
+            name: editData.name,
+            type: editData.type,
+            status: editData.status,
+          }
           : M
       )
     );
@@ -166,7 +163,7 @@ function Manager() {
 
           {/* Add new Manager */}
           <button
-            onClick={() => navigate("/add-manager")}
+            onClick={() => navigate("/dashboard/add-manager")}
             className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition text-white px-5 py-2 rounded-full shadow-md "
           >
             <FaPlus />
@@ -246,11 +243,10 @@ function Manager() {
                       </select>
                     ) : (
                       <span
-                        className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          M.status === "Active"
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${M.status === "Active"
                             ? "bg-green-100 text-green-700"
                             : "bg-red-100 text-red-700"
-                        }`}
+                          }`}
                       >
                         {M.status}
                       </span>
@@ -277,7 +273,7 @@ function Manager() {
                     ) : (
                       <div className="flex justify-center gap-4 text-slate-500">
                         <button
-                          onClick={() => navigate("/managerdetails")}
+                          onClick={() => navigate("/dashboard/managerdetails")}
                           className="hover:text-green-600 transition"
                         >
                           <FaEye />
@@ -302,7 +298,7 @@ function Manager() {
             </tbody>
           </table>
 
-                {/* Previous Next btn  */}
+          {/* Previous Next btn  */}
 
           <div className="flex justify-between items-center px-5 py-5 bg-slate-50">
             <span className="text-sm text-slate-600">
@@ -313,11 +309,10 @@ function Manager() {
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className={`px-4 py-1 rounded-md text-sm font-medium shadow ${
-                  currentPage === 1
+                className={`px-4 py-1 rounded-md text-sm font-medium shadow ${currentPage === 1
                     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                     : "bg-indigo-600 text-white hover:bg-indigo-700"
-                }`}
+                  }`}
               >
                 Previous
               </button>
@@ -326,11 +321,10 @@ function Manager() {
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }
                 disabled={currentPage === totalPages}
-                className={`px-4 py-1 rounded-md text-sm font-medium shadow ${
-                  currentPage === totalPages
+                className={`px-4 py-1 rounded-md text-sm font-medium shadow ${currentPage === totalPages
                     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                     : "bg-indigo-600 text-white hover:bg-indigo-700"
-                }`}
+                  }`}
               >
                 Next
               </button>

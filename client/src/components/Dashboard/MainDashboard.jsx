@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   FaFolderOpen,
   FaUsers,
@@ -12,143 +12,187 @@ import {
   FaBell,
   FaTools,
   FaIndustry,
-  FaCogs,
   FaStar,
   FaLaptopCode,
   FaBlog,
   FaLightbulb,
   FaBars,
+  FaThLarge,
+  FaWrench,
 } from "react-icons/fa";
 
 function MainDashboard() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
+  const sidebarRef = useRef(null);
+  const location = useLocation();
 
   const menuItems = [
-    { to: "", label: "Dashboard", icon: <FaChartBar /> },
-    { to: "projects", label: "Projects", icon: <FaFolderOpen /> },
-    { to: "clients", label: "Clients", icon: <FaUsers /> },
-    { to: "reports", label: "Reports", icon: <FaChartBar /> },
+    { to: "", label: "Dashboard", icon: <FaChartBar />, allowedRoles: ["admin", "employee", "project_manager", "client_manager", "employee_manager", "service_manager"] },
+    { to: "projects", label: "Projects", icon: <FaFolderOpen />, allowedRoles: ["admin", "project_manager"] },
+    { to: "clients", label: "Clients", icon: <FaUsers />, allowedRoles: ["admin", "client_manager"] },
     {
       label: "Services",
       icon: <FaTools />,
+      allowedRoles: ["admin", "service_manager"],
       submenu: [
-        { to: "services/clientrating", label: "Client Rating", icon: <FaStar /> },
-        { to: "services/projectshowcase", label: "Project Showcase", icon: <FaLaptopCode /> },
-        { to: "services/blog", label: "Blog", icon: <FaBlog /> },
-        { to: "services/solutions", label: "Solutions", icon: <FaLightbulb /> },
+        { to: "services/clientrating", label: "Client Rating", icon: <FaStar />, allowedRoles: ["admin", "service_manager"] },
+        { to: "services/projectshowcase", label: "Project Showcase", icon: <FaLaptopCode />, allowedRoles: ["admin", "service_manager"] },
+        { to: "services/blog", label: "Blog", icon: <FaBlog />, allowedRoles: ["admin", "service_manager"] },
+        { to: "services/solutions", label: "Solutions", icon: <FaLightbulb />, allowedRoles: ["admin", "service_manager"] },
+        {
+          to: "developmentToolkit", label: "Development Toolkit", icon: <FaWrench />, allowedRoles: ["admin", "service_manager"]
+        }
       ],
     },
-    { to: "notification", label: "Notification", icon: <FaBell /> },
-    { to: "industry-analysis", label: "Industry Analysis", icon: <FaIndustry /> },
     {
       label: "User Management",
       icon: <FaUsers />,
+      allowedRoles: ["admin", "employee_manager"],
       submenu: [
-        { to: "manager", label: "Manager", icon: <FaUsers /> },
-        { to: "employee", label: "Employee", icon: <FaUsers /> },
+        { to: "managers", label: "Manager", icon: <FaUsers />, allowedRoles: ["admin"] },
+        { to: "employee", label: "Employee", icon: <FaUsers />, allowedRoles: ["admin", "employee_manager"] },
       ],
     },
-    { to: "WorkSpace", label: "Work Space", icon: <FaCogs /> },
+    { to: "workspace", label: "Work Space", icon: <FaThLarge />, allowedRoles: ["employee"] },
+    { to: "reports", label: "Reports", icon: <FaChartBar />, allowedRoles: ["admin"] },
+    { to: "industry-analysis", label: "Industry Analysis", icon: <FaIndustry />, allowedRoles: ["admin"] },
+    { to: "notification", label: "Notification", icon: <FaBell />, allowedRoles: ["admin", "employee", "project_manager", "client_manager", "employee_manager", "service_manager"] },
   ];
 
   const handleSignOut = () => {
-    navigate("/login");
+    localStorage.removeItem("token");
+    navigate("/dashboard/login")
   };
+
+  const [role, setRole] = useState('');
+  useEffect(() => {
+    const storedRole = localStorage.getItem("token");
+    setRole(storedRole);
+
+    const handleClickOutside = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setActiveSubmenu(null);
+        setShowDropdown(false);
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
       <aside
-        className={`bg-gray-900 text-white flex flex-col transition-all duration-500 ease-in-out shadow-xl`}
-        style={{ width: isOpen ? "18rem" : "5rem" }}
+        ref={sidebarRef}
+        className={`bg-gray-900 text-gray-400 flex flex-col relative`}
+        style={{ width: isOpen ? "16rem" : "4rem" }}
       >
         {/* Sidebar Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-800">
-          {isOpen && <h2 className="text-xl font-semibold tracking-wide">Workspace</h2>   }
+        <div className="flex items-center p-4.5 border-b border-gray-800 gap-8 h-14">
           <button onClick={() => setIsOpen(!isOpen)} className="text-gray-400 hover:text-white">
-            <FaBars size={20} />
+            <FaBars size={26} />
           </button>
+          {isOpen && <h2 className="text-2xl font-semibold tracking-wide">Workspace</h2>}
         </div>
 
         {/* Menu Items */}
-        <nav className="flex-1 px-2 py-4 overflow-y-auto">
-          {menuItems.map((item) =>
-            item.submenu ? (
-              <div key={item.label} className="mb-2">
-                <button
-                  onClick={() =>
-                    setActiveSubmenu(activeSubmenu === item.label ? null : item.label)
-                  }
-                  className="flex items-center justify-between w-full px-3 py-2 rounded-lg hover:bg-gray-800 transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    {item.icon}
-                    {isOpen && <span>{item.label}</span>}
-                  </div>
-                  {isOpen &&
-                    (activeSubmenu === item.label ? <FaChevronUp size={14} /> : <FaChevronDown size={14} />)}
-                </button>
+        <nav className="flex-1 px-2 py-2 space-y-1">
+          {menuItems
+            .filter((item) => !role || item.allowedRoles.includes(role))
+            .map((item) => {
+              const isParentActive = item.submenu?.some((sub) => location.pathname.includes(sub.to));
+              return item.submenu ? (
+                <div key={item.label} className="space-y-1">
+                  <button
+                    onClick={() => setActiveSubmenu(activeSubmenu === item.label ? null : item.label)}
+                    className={`flex items-center justify-between w-full px-3.5 h-10 rounded-lg transition-colors ${isParentActive
+                      ? " bg-green-500 text-white font-medium"
+                      : activeSubmenu === item.label
+                        ? "bg-gray-800 text-white"
+                        : "hover:bg-gray-800 hover:text-white"
+                      }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      {item.icon}
+                      {isOpen && <span>{item.label}</span>}
+                    </div>
+                    {isOpen && (activeSubmenu === item.label ? <FaChevronUp size={14} /> : <FaChevronDown size={14} />)}
+                  </button>
 
-                {/* Submenu */}
-                <div
-                  className={`flex flex-col ml-6 mt-1 space-y-1 transition-all duration-300 overflow-hidden ${
-                    activeSubmenu === item.label ? "max-h-96" : "max-h-0"
-                  }`}
-                >
-                  {item.submenu.map((sub) => (
-                    <NavLink
-                      key={sub.to}
-                      to={sub.to}
-                      end
-                      className={({ isActive }) =>
-                        `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
-                          isActive
-                            ? "bg-green-500 text-white font-medium"
-                            : "text-gray-400 hover:bg-gray-800 hover:text-white"
-                        }`
-                      }
-                    >
-                      {sub.icon}
-                      {isOpen && <span>{sub.label}</span>}
-                    </NavLink>
-                  ))}
+                  {/* Submenu */}
+                  <div
+                    className={`flex flex-col overflow-hidden ${activeSubmenu === item.label ? "max-h-72" : "max-h-0"
+                      }`}
+                  >
+                    {item.submenu
+                      .filter((sub) => !role || sub.allowedRoles.includes(role))
+                      .map((sub) => (
+                        <NavLink
+                          key={sub.to}
+                          to={sub.to}
+                          end
+                          onClick={() => {
+                            setActiveSubmenu(null);
+                            setIsOpen(false);
+                          }}
+                          className={({ isActive }) =>
+                            `flex items-center gap-3 h-9 px-4 rounded-lg text-sm transition-all ${isActive
+                              ? "bg-green-700 text-white font-medium"
+                              : "text-gray-400 hover:bg-gray-800 hover:text-white hover:pl-4.5"
+                            }`
+                          }
+                        >
+                          {sub.icon}
+                          {isOpen && <span>{sub.label}</span>}
+                        </NavLink>
+                      ))}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
-                    isActive
+              ) : (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end
+                  onClick={() => {
+                    setActiveSubmenu(null);
+                    setIsOpen(false);
+                  }}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-3.5 h-10 rounded-lg transition-colors ${isActive
                       ? "bg-green-500 text-white font-medium"
                       : "text-gray-400 hover:bg-gray-800 hover:text-white"
-                  }`
-                }
-              >
-                {item.icon}
-                {isOpen && <span>{item.label}</span>}
-              </NavLink>
-            )
-          )}
+                    }`
+                  }
+                >
+                  {item.icon}
+                  {isOpen && <span>{item.label}</span>}
+                </NavLink>
+              )
+            }
+            )}
         </nav>
 
         {/* User Profile */}
         <div
-          className="p-4 border-t border-gray-800 hover:bg-gray-800 cursor-pointer transition-colors"
-          onMouseEnter={() => setShowDropdown(true)}
-          onMouseLeave={() => setShowDropdown(false)}
+          className="p-3.5 border-t border-gray-800 hover:bg-gray-800 cursor-pointer transition-colors"
+          onMouseEnter={() => {
+            setShowDropdown(true);
+            setIsOpen(true);   
+            setActiveSubmenu(null); 
+          }}
+          onMouseLeave={() => {
+            setShowDropdown(false);
+          }}
         >
           <div className="flex items-center gap-3">
             <FaUserCircle size={32} className="text-green-400" />
             {isOpen && (
               <div>
                 <p className="text-sm font-semibold">John Doe</p>
-                <p className="text-xs text-gray-400">Admin</p>
+                <p className="text-xs text-gray-400">{role || "User"}</p>
               </div>
             )}
           </div>
@@ -156,14 +200,14 @@ function MainDashboard() {
           {/* Dropdown */}
           {showDropdown && (
             <ul
-              className={`mt-3 space-y-2 text-sm transition-all duration-300 ${
-                isOpen ? "block" : "hidden"
-              }`}
+              className={`mt-2 space-y-1 text-sm transition-all duration-300 ${isOpen ? "block" : "hidden"
+                }`}
             >
               <li>
                 <NavLink
                   to="/profile"
-                  className="flex items-center gap-2 px-2 py-1 hover:bg-gray-700 rounded-lg"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2 px-3 py-2 hover:bg-gray-700 rounded-lg"
                 >
                   <FaUserCircle />
                   Profile
@@ -172,7 +216,8 @@ function MainDashboard() {
               <li>
                 <NavLink
                   to="/settings"
-                  className="flex items-center gap-2 px-2 py-1 hover:bg-gray-700 rounded-lg"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2 px-3 py-2 hover:bg-gray-700 rounded-lg"
                 >
                   <FaCog />
                   Settings
@@ -181,7 +226,7 @@ function MainDashboard() {
               <li>
                 <button
                   onClick={handleSignOut}
-                  className="flex items-center gap-2 px-2 py-1 text-red-400 hover:bg-gray-700 rounded-lg w-full text-left"
+                  className="flex items-center gap-2 px-3 py-2 text-red-400 hover:bg-gray-700 rounded-lg w-full text-left"
                 >
                   <FaSignOutAlt />
                   Sign Out
@@ -199,4 +244,5 @@ function MainDashboard() {
     </div>
   );
 }
+
 export default MainDashboard;

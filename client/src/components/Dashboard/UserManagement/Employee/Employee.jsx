@@ -1,6 +1,4 @@
-
-
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -61,7 +59,6 @@ function Employee() {
     },
   ]);
 
-  const [showForm, setShowForm] = useState(false);
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState({ name: "", type: "", status: "" });
 
@@ -167,7 +164,7 @@ function Employee() {
 
           {/* Add new Employee */}
           <button
-            onClick={() => navigate("/add-manager")}
+            onClick={() => navigate("/dashboard/add-employee")}
             className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition text-white px-5 py-2 rounded-full shadow-md"
           >
             <FaPlus />
@@ -278,7 +275,7 @@ function Employee() {
                     ) : (
                       <div className="flex justify-center gap-4 text-slate-500">
                         <button
-                          onClick={() => navigate("/managerdetails")}
+                          onClick={() => navigate("/dashboard/employeedetails")}
                           className="hover:text-green-600 transition"
                         >
                           <FaEye />
