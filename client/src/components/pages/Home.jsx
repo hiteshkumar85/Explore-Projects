@@ -4,7 +4,6 @@ import About from './home/About.jsx';
 import Hero from './home/Hero.jsx';
 import Project from './home/Project.jsx';
 import Solution from './home/Solution.jsx';
-import FooterPage from './FooterPage.jsx';
 import Strategy from './home/Strategy.jsx';
 import ContactUs from './home/ContactUs.jsx';
 
@@ -76,7 +75,7 @@ const Home = () => {
             <Strategy />
             <AnimatedTestimonials testimonials={testimonials} />
             <ContactUs/>
-            <FooterPage />
+            
         </main>
     );
 };

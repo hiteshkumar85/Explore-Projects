@@ -3,10 +3,12 @@ const express = require('express');
 const connectDB = require('./dbconnection');
 const cors = require('cors');
 const path = require('path');
-
 const app = express();
 
+app.use("/public", express.static(path.join(__dirname, 'public')));
+
 connectDB();
+
 app.use(cors({
   origin: ['https://team4dev.netlify.app']
 }));
