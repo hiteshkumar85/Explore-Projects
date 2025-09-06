@@ -108,7 +108,7 @@ function MainDashboard() {
                 <div key={item.label} className="space-y-1">
                   <button
                     onClick={() => setActiveSubmenu(activeSubmenu === item.label ? null : item.label)}
-                    className={`flex items-center justify-between w-full px-3.5 h-10 rounded-lg transition-colors ${isParentActive
+                    className={`relative group flex items-center justify-between w-full px-3.5 h-10 rounded-lg transition-colors ${isParentActive
                       ? " bg-green-500 text-white font-medium"
                       : activeSubmenu === item.label
                         ? "bg-gray-800 text-white"
@@ -119,12 +119,21 @@ function MainDashboard() {
                       {item.icon}
                       {isOpen && <span>{item.label}</span>}
                     </div>
-                    {isOpen && (activeSubmenu === item.label ? <FaChevronUp size={14} /> : <FaChevronDown size={14} />)}
+
+                    {isOpen &&
+                      (activeSubmenu === item.label ? <FaChevronUp size={14} /> : <FaChevronDown size={14} />)}
+
+                    {!isOpen && (
+                      <span className="pointer-events-none absolute left-full top-1/2 -translate-y-1/2 ml-3 px-2 py-1 text-xs rounded bg-gray-800 text-white opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-150 whitespace-nowrap shadow-lg z-50">
+                        {item.label}
+                      </span>
+                    )}
+
                   </button>
 
                   {/* Submenu */}
                   <div
-                    className={`flex flex-col overflow-hidden ${activeSubmenu === item.label ? "max-h-72" : "max-h-0"
+                    className={`flex flex-col ${activeSubmenu === item.label ? "max-h-72 overflow-visible" : "max-h-0 overflow-hidden"
                       }`}
                   >
                     {item.submenu
@@ -139,7 +148,7 @@ function MainDashboard() {
                             setIsOpen(false);
                           }}
                           className={({ isActive }) =>
-                            `flex items-center gap-3 h-9 px-4 rounded-lg text-sm transition-all ${isActive
+                            `relative group flex items-center gap-3 h-9 px-4 rounded-lg text-sm transition-all ${isActive
                               ? "bg-green-700 text-white font-medium"
                               : "text-gray-400 hover:bg-gray-800 hover:text-white hover:pl-4.5"
                             }`
@@ -147,7 +156,15 @@ function MainDashboard() {
                         >
                           {sub.icon}
                           {isOpen && <span>{sub.label}</span>}
+
+                          {!isOpen && (
+                            <span className="pointer-events-none absolute left-full top-1/2 -translate-y-1/2 ml-3 px-2 py-1 text-xs rounded bg-gray-800 text-white opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-150 whitespace-nowrap shadow-lg z-50">
+                              {sub.label}
+                            </span>
+                          )}
+
                         </NavLink>
+
                       ))}
                   </div>
                 </div>
@@ -161,7 +178,7 @@ function MainDashboard() {
                     setIsOpen(false);
                   }}
                   className={({ isActive }) =>
-                    `flex items-center gap-3 px-3.5 h-10 rounded-lg transition-colors ${isActive
+                    `relative group flex items-center gap-3 px-3.5 h-10 rounded-lg transition-colors ${isActive
                       ? "bg-green-500 text-white font-medium"
                       : "text-gray-400 hover:bg-gray-800 hover:text-white"
                     }`
@@ -169,7 +186,15 @@ function MainDashboard() {
                 >
                   {item.icon}
                   {isOpen && <span>{item.label}</span>}
+
+                  {!isOpen && (
+                    <span className="pointer-events-none absolute left-full top-1/2 -translate-y-1/2 ml-3 px-2 py-1 text-xs rounded bg-gray-800 text-white opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-150 whitespace-nowrap shadow-lg z-50">
+                      {item.label}
+                    </span>
+                  )}
+
                 </NavLink>
+
               )
             }
             )}
@@ -180,8 +205,8 @@ function MainDashboard() {
           className="p-3.5 border-t border-gray-800 hover:bg-gray-800 cursor-pointer transition-colors"
           onMouseEnter={() => {
             setShowDropdown(true);
-            setIsOpen(true);   
-            setActiveSubmenu(null); 
+            setIsOpen(true);
+            setActiveSubmenu(null);
           }}
           onMouseLeave={() => {
             setShowDropdown(false);
