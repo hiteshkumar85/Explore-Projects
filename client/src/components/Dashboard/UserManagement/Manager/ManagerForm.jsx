@@ -1,480 +1,386 @@
+// AddEmployee.jsx
+import React, { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 
-import React, { useEffect, useState } from "react";
-import { FaEdit, FaUpload, FaTrash, FaEye, FaEyeSlash } from "react-icons/fa";
-
-
-export default function ManagerForm({ onClose, onAdd }) {
-  const generateManagerId = () => {
-    const date = new Date();
-    const dd = String(date.getDate()).padStart(2, "0");
-    const mm = String(date.getMonth() + 1).padStart(2, "0");
-    const yy = String(date.getFullYear()).slice(-2);
-    const rand = Math.random().toString(36).slice(2, 6).toUpperCase();
-    return `m-${dd}${mm}${yy}-${rand}`;
-  };
-
-  const [step, setStep] = useState(1);
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    id: generateManagerId(),
-    status: "Active", // Active / Inactive
-    profileImage: null,
-    name: "",
-    email: "",
-    phone: "",
-    dob: "",
-    gender: "",
-    address: "",
-    department: "",
-    position: "",
-    joiningDate: "",
-    experience: "",
-    employmentType: "Full-time",
-    workMode: "On-site",
-    reportingTo: "",
-    ctc: "",
-    highestDegree: "",
-    university: "",
-    keySkills: "",
-    notes: "",
-    confirmationMessage: "",
-    digitalSignature: "",
-    portalPassword: "",
+export default function AddEmployee() {
+  const { register, handleSubmit, watch, reset, setValue, getValues } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+      fullName: "",
+      dob: "",
+      gender: "Male",
+      phone: "",
+      address: "",
+      status: "Active",
+      joiningDate: "",
+      salary: "",
+      position: "",
+      role: "",
+      degree: "",
+      institute: "",
+      experience: "",
+      skills: "",
+      accountHolder: "",
+      bankName: "",
+      ifsc: "",
+      accountNumber: "",
+      employeeId: "",
+    },
   });
 
-  // Validation / errors
-  const [errors, setErrors] = useState({});
+  const [mode, setMode] = useState("form");
+  const [currentStep, setCurrentStep] = useState(1);
+  const lastEmployeeNumberRef = useRef(0);
+  const [employeeId, setEmployeeId] = useState("");
+  const profileFile = watch("profileImage");
+  const resumeFile = watch("resume");
+  const [profilePreview, setProfilePreview] = useState(
+    "https://via.placeholder.com/150"
+  );
+
+  // generate employee id
+  function generateId() {
+    const year = new Date().getFullYear();
+    lastEmployeeNumberRef.current += 1;
+    const padded = String(lastEmployeeNumberRef.current).padStart(3, "0");
+    const id = `EMP${year}-${padded}`;
+    setEmployeeId(id);
+    setValue("employeeId", id);
+  }
 
   useEffect(() => {
-    // regenerate id only when necessary (not on every render)
-    if (!formData.id) setFormData((p) => ({ ...p, id: generateManagerId() }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    generateId();
   }, []);
 
-  const handleFileChange = (e, field) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const maxBytes = 5 * 1024 * 1024; // 5MB
-    if (file.size > maxBytes) {
-      setErrors((s) => ({ ...s, profileImage: "File must be <= 5MB" }));
-      return;
+  useEffect(() => {
+    if (profileFile && profileFile.length > 0) {
+      const file = profileFile[0];
+      const url = URL.createObjectURL(file);
+      setProfilePreview(url);
+      return () => URL.revokeObjectURL(url);
+    } else {
+      setProfilePreview("https://via.placeholder.com/150");
     }
-    if (!/image\/(png|jpe?g)/i.test(file.type)) {
-      setErrors((s) => ({ ...s, profileImage: "Only PNG/JPG allowed" }));
-      return;
-    }
-    setErrors((s) => ({ ...s, profileImage: null }));
-    setFormData({ ...formData, [field]: file });
-  };
+  }, [profileFile]);
 
-  const removeImage = () => {
-    setFormData({ ...formData, profileImage: null });
-  };
+  function removeImage() {
+    setValue("profileImage", null);
+    setProfilePreview("https://via.placeholder.com/150");
+  }
 
-  const simpleValidateStep = (s) => {
-    const err = {};
-    if (s === 1) {
-      if (!formData.name) err.name = "Full name required";
-      if (!formData.email) err.email = "Email required";
-    }
-    if (s === 2) {
-      if (!formData.position) err.position = "Position required";
-      if (!formData.department) err.department = "Department required";
-    }
-    if (s === 4) {
-      if (!formData.highestDegree) err.highestDegree = "Degree required";
-    }
-    setErrors(err);
-    return Object.keys(err).length === 0;
-  };
+  function showStep(step) {
+    setCurrentStep(step);
+  }
 
-  const handleNext = (s) => {
-    const ok = simpleValidateStep(s);
-    if (!ok) return;
-    setStep(s + 1);
-  };
+  function nextStep() {
+    if (currentStep < 4) setCurrentStep((s) => s + 1);
+    else setMode("confirm");
+  }
 
-  const handleBack = () => setStep((p) => Math.max(1, p - 1));
+  function prevStep() {
+    if (currentStep > 1) setCurrentStep((s) => s - 1);
+  }
 
-  const handleSave = () => {
-    // final validation
-    const finalErr = {};
-    if (!formData.digitalSignature)
-      finalErr.digitalSignature = "Please type your name to sign";
-    if (!formData.portalPassword)
-      finalErr.portalPassword = "Please set a portal password";
-    setErrors(finalErr);
-    if (Object.keys(finalErr).length) return;
+  function backToForm() {
+    setMode("form");
+    setCurrentStep(1);
+  }
 
-    // Prepare a lightweight payload (avoid sending File objects directly if backend expects multipart)
-    onAdd && onAdd(formData);
-    setStep(5); // show success/complete or you can close
-  };
+  function onConfirm() {
+    setMode("success");
+  }
 
-  const resetForm = () => {
-    setFormData({ ...formData, id: generateManagerId() });
-    setStep(1);
-    setErrors({});
-  };
+  function onReset() {
+    reset();
+    setProfilePreview("https://via.placeholder.com/150");
+    setMode("form");
+    setCurrentStep(1);
+    generateId();
+  }
+
+  const values = getValues();
+
+  function progressStage() {
+    if (mode === "form") return 1;
+    if (mode === "confirm") return 2;
+    return 3;
+  }
 
   return (
-    <div className="fixed inset-0 flex items-center  z-50 p-4">
-      <div className="">
-        <div className="flex items-center justify-between p-5 border-b">
-          <h2 className="text-xl font-semibold">Add Manager • Enhanced</h2>
-          <div className="flex items-center gap-3">
-            <div className="text-sm">ID:</div>
-            <div className="font-mono text-sm px-3 py-1 bg-gray-100 rounded">{formData.id}</div>
-            <button
-              onClick={() => setFormData({ ...formData, id: generateManagerId() })}
-              className="text-xs px-3 py-1 border rounded bg-gray-50 hover:bg-gray-100">
-              Regenerate
-            </button>
-            <button
-              onClick={() => onClose && onClose()}
-              className="px-3 py-1 rounded bg-red-50 hover:bg-red-100 text-red-600">
-              Close
-            </button>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-pink-50 text-gray-900 p-2">
+      <div className="relative w-[97%] h-[95vh] bg-white rounded-3xl shadow-2xl p-3 flex flex-col border border-gray-100">
+        <h1 className="text-4xl font-extrabold text-center mb-3 text-blue-700 tracking-tight">Add Employee</h1>
+
+        <div className="absolute left-4 top-4 flex justify-end mb-2">
+          <button
+            onClick={() => alert("Going back to home page...")}
+            className="px-5 py-2 bg-gray-200 text-blue-700 rounded-lg font-semibold shadow hover:bg-blue-50 transition"
+          >
+            ←
+          </button>
+        </div>
+
+
+        {/* Progress */}
+        <div id="progressContainer" className="w-2/3 mx-auto flex items-center justify-between mb-5">
+          {[1, 2, 3].map((n, idx) => {
+            const stage = progressStage();
+            const isCompleted = n < stage;
+            const isActive = n === stage;
+            return (
+              <React.Fragment key={n}>
+                <div className="flex items-center space-x-2">
+                  <div
+                    className={
+                      "step-circle flex items-center justify-center w-12 h-12 rounded-full font-bold shadow " +
+                      (isCompleted || isActive
+                        ? "bg-blue-600 text-white border-2 border-blue-400"
+                        : "border-2 border-gray-300 text-gray-400 bg-white")
+                    }
+                  >
+                    {isCompleted ? (
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    ) : n}
+                  </div>
+                  <span className={"step-label font-semibold text-lg " + (isCompleted || isActive ? "text-blue-700" : "text-gray-400")}>
+                    {n === 1 ? "Employee Details" : n === 2 ? "Confirmation" : "Success"}
+                  </span>
+                </div>
+                {idx < 2 && (
+                  <div
+                    className={
+                      "line flex-1 h-2 mx-4 rounded-full " +
+                      (idx < stage - 1 ? "bg-gradient-to-r from-blue-400 to-pink-300" : "bg-gray-200")
+                    }
+                  />
+                )}
+              </React.Fragment>
+            );
+          })}
+        </div>
+
+        <div id="formContainer" className={"flex flex-1 gap-10 " + (mode !== "form" ? "hidden" : "")}>
+          {/* Left */}
+          <div className="w-1/3 bg-white rounded-2xl p-4 flex flex-col items-center border border-gray-100 shadow">
+            <div className="relative w-44 h-44 mb-6">
+              <img id="profilePreview" src={profilePreview} className="w-44 h-44 rounded-full object-cover border-4 border-blue-300 shadow" alt="Profile" />
+            </div>
+            <div className="flex gap-2 mb-10">
+              <label className="px-3 py-1 bg-blue-600 text-white rounded-lg cursor-pointer">
+                Upload
+                <input type="file" accept="image/*" className="hidden" {...register("profileImage")} />
+              </label>
+              <button onClick={removeImage} className="px-3 py-1 bg-red-500 text-white rounded-lg">Remove</button>
+            </div>
+
+            <label className="block w-full mb-1 font-semibold text-blue-700">Employee ID</label>
+            <input id="employeeId" {...register("employeeId")} readOnly className="w-full p-2 rounded bg-gray-50 border border-gray-300 mb-2" />
+
+            <label className="block w-full font-semibold text-blue-700">Email</label>
+            <input {...register("email")} type="email" className="w-full p-2 rounded bg-gray-50 border border-gray-300 mb-2" />
+
+            <label className="block w-full font-semibold text-blue-700">Password</label>
+            <input {...register("password")} type="password" className="w-full p-2 rounded bg-gray-50 border border-gray-300" />
+          </div>
+
+          {/* Right */}
+          <div className="w-2/3 bg-white rounded-2xl p-4 flex flex-col border border-gray-100 shadow">
+            <div className="grid grid-cols-4 gap-4 mb-4">
+              {[
+                { i: 1, t: "Personal" },
+                { i: 2, t: "Other" },
+                { i: 3, t: "Education" },
+                { i: 4, t: "Bank" },
+              ].map((tab) => (
+                <div key={tab.i} onClick={() => showStep(tab.i)} className={"tabHeader text-center py-3 rounded-xl cursor-pointer font-semibold text-lg shadow " + (currentStep === tab.i ? "bg-blue-600 text-white" : "bg-gray-100 text-blue-700 hover:bg-blue-50 transition")}>
+                  {tab.t}
+                </div>
+              ))}
+            </div>
+
+            <hr className="border-gray-200 mb-2" />
+
+            <div id="formSteps" className="flex-1">
+              {/* Step 1 */}
+              <div className={currentStep === 1 ? "grid grid-cols-2 gap-3" : "hidden"}>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Full Name</label>
+                  <input {...register("fullName")} type="text" className="w-full p-3 rounded bg-gray-50 border border-gray-300"/>
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Date of Birth</label>
+                  <input {...register("dob")} type="date" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Gender</label>
+                  <select {...register("gender")} className="w-full p-3 rounded bg-gray-50 border border-gray-300">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Phone</label>
+                  <input {...register("phone")} type="text" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+                <div className="col-span-2">
+                  <label className="block mb-1 font-medium text-blue-700">Address</label>
+                  <textarea {...register("address")} className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className={currentStep === 2 ? "grid grid-cols-2 gap-3" : "hidden"}>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Status</label>
+                  <select {...register("status")} className="w-full p-3 rounded bg-gray-50 border border-gray-300">
+                    <option>Active</option>
+                    <option>Inactive</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Joining Date</label>
+                  <input {...register("joiningDate")} type="date" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Salary</label>
+                  <input {...register("salary")} type="number" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Position</label>
+                  <input {...register("position")} type="text" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+                <div className="col-span-2">
+                  <label className="block mb-1 font-medium text-blue-700">Role</label>
+                  <input {...register("role")} type="text" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div className={currentStep === 3 ? "grid grid-cols-2 gap-3" : "hidden"}>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Highest Degree</label>
+                  <input {...register("degree")} type="text" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Institute</label>
+                  <input {...register("institute")} type="text" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Experience (Years)</label>
+                  <input {...register("experience")} type="number" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Skills</label>
+                  <input {...register("skills")} type="text" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+                <div className="col-span-2">
+                  <label className="block mb-1 font-medium text-blue-700">Resume</label>
+                  <input {...register("resume")} type="file" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+              </div>
+
+              {/* Step 4 */}
+              <div className={currentStep === 4 ? "grid grid-cols-2 gap-3" : "hidden"}>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Account Holder Name</label>
+                  <input {...register("accountHolder")} type="text" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Bank Name</label>
+                  <input {...register("bankName")} type="text" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">IFSC Code</label>
+                  <input {...register("ifsc")} type="text" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium text-blue-700">Account Number</label>
+                  <input {...register("accountNumber")} type="text" className="w-full p-3 rounded bg-gray-50 border border-gray-300" />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-between mt-8">
+              <button onClick={prevStep} className="px-6 py-3 bg-gray-200 text-blue-700 rounded-xl font-semibold shadow hover:bg-blue-50 transition">Previous</button>
+              <button onClick={nextStep} className="px-7 py-3 bg-blue-600 text-white rounded-xl font-semibold shadow hover:bg-blue-700 transition">Next</button>
+            </div>
           </div>
         </div>
 
-        <div className="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left column: ID & Status */}
-          <div className="space-y-4">
-            <div className="p-4 bg-gray-50 rounded-lg border"> 
-              <h6 className="text-sm font-semibold">Manager ID</h6>
-              <p className="text-xs text-gray-600">Auto-generated — edit if needed</p>
-              <input
-                value={formData.id}
-                onChange={(e) => setFormData({ ...formData, id: e.target.value })}
-                className="mt-2 w-full border px-3 py-2 rounded"
-              />
+        {/* Confirmation */}
+        <div id="confirmationSection" className={`${mode === "confirm" ? "" : "hidden"} h-full bg-white p-4 rounded-2xl border border-gray-100 shadow`}>
+          <form onSubmit={handleSubmit(() => onConfirm())}>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-blue-50 p-4 rounded-2xl shadow border border-gray-100">
+                <h3 className="text-xl font-bold mb-2 text-blue-700">Personal Details</h3>
+                <hr className="border-blue-200 mb-1" />
+                <p><strong>ID:</strong> {employeeId}</p>
+                <p><strong>Email:</strong> {values.email}</p>
+                <p><strong>Full Name:</strong> {values.fullName}</p>
+                <p><strong>DOB:</strong> {values.dob}</p>
+                <p><strong>Gender:</strong> {values.gender}</p>
+                <p><strong>Phone:</strong> {values.phone}</p>
+                <p><strong>Address:</strong> {values.address}</p>
+              </div>
 
-              <h6 className="mt-4 text-sm font-semibold">Status</h6>
-              <div className="flex gap-2 mt-2">
-                {['Active','Inactive'].map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => setFormData({ ...formData, status: s })}
-                    className={`px-3 py-1 rounded-full border ${formData.status === s ? 'bg-blue-600 text-white' : 'bg-white'}`}>
-                    {s}
-                  </button>
-                ))}
+              <div className="bg-blue-50 p-4 rounded-2xl shadow border border-gray-100">
+                <h3 className="text-xl font-bold mb-2 text-blue-700">Job Details</h3>
+                <hr className="border-blue-200 mb-1" />
+                <p><strong>Status:</strong> {values.status}</p>
+                <p><strong>Joining Date:</strong> {values.joiningDate}</p>
+                <p><strong>Salary:</strong> ₹{values.salary}</p>
+                <p><strong>Position:</strong> {values.position}</p>
+                <p><strong>Role:</strong> {values.role}</p>
+              </div>
+
+              <div className="bg-blue-50 p-4 rounded-2xl shadow border border-gray-100">
+                <h3 className="text-xl font-bold mb-2 text-blue-700">Education Details</h3>
+                <hr className="border-blue-200 mb-1" />
+                <p><strong>Degree:</strong> {values.degree}</p>
+                <p><strong>Institute:</strong> {values.institute}</p>
+                <p><strong>Experience:</strong> {values.experience} years</p>
+                <p><strong>Skills:</strong> {values.skills}</p>
+                <p><strong>Resume:</strong> {resumeFile && resumeFile.length ? resumeFile[0].name : "Not Uploaded"}</p>
+              </div>
+
+              <div className="bg-blue-50 p-4 rounded-2xl shadow border border-gray-100">
+                <h3 className="text-xl font-bold mb-2 text-blue-700">Bank Details</h3>
+                <hr className="border-blue-200 mb-1" />
+                <p><strong>Account Holder:</strong> {values.accountHolder}</p>
+                <p><strong>Bank:</strong> {values.bankName}</p>
+                <p><strong>IFSC:</strong> {values.ifsc}</p>
+                <p><strong>Account Number:</strong> {values.accountNumber}</p>
               </div>
             </div>
 
-            {/* Profile image box */}
-            <div className="p-4 bg-white rounded-lg border flex flex-col items-center">
-              <h6 className="font-semibold">Profile Image</h6>
-              <p className="text-xs text-gray-500">PNG/JPG up to 5MB — required</p>
-              <div className="mt-3 w-40 h-40 rounded-full overflow-hidden border-4 border-gray-100 shadow flex items-center justify-center bg-gray-50">
-                {formData.profileImage ? (
-                  <img
-                    src={URL.createObjectURL(formData.profileImage)}
-                    alt="preview"
-                    className="object-cover w-full h-full"
-                  />
-                ) : (
-                  <div className="text-gray-400 text-sm">No image</div>
-                )}
-              </div>
-
-              <label className="flex items-center gap-2 mt-3 cursor-pointer">
-                <FaUpload />
-                <span className="text-sm">Upload</span>
-                <input
-                  type="file"
-                  accept="image/png, image/jpeg"
-                  onChange={(e) => handleFileChange(e, 'profileImage')}
-                  className="hidden"
-                />
-              </label>
-              <button
-                onClick={removeImage}
-                className="mt-2 text-sm text-red-600 flex items-center gap-2">
-                <FaTrash /> Remove
-              </button>
-              {errors.profileImage && (
-                <p className="text-xs text-red-600 mt-2">{errors.profileImage}</p>
-              )}
+            <div className="mt-4 flex justify-end gap-6">
+              <button type="button" onClick={backToForm} className="px-6 py-3 bg-gray-200 text-blue-700 rounded-xl font-semibold shadow hover:bg-blue-50 transition">Back</button>
+              <button type="submit" className="px-6 py-3 bg-green-500 text-white rounded-xl font-semibold shadow hover:bg-green-600 transition">Confirm</button>
             </div>
+          </form>
+        </div>
 
-            {/* Quick action: Remove or regenerate id */}
-            <div className="p-4 bg-gray-50 rounded-lg border text-sm">
-              <p className="font-semibold">Quick actions</p>
-              <div className="flex gap-2 mt-2">
-                <button
-                  onClick={() => setFormData({ ...formData, id: generateManagerId() })}
-                  className="px-3 py-1 border rounded">New ID</button>
-                <button
-                  onClick={() => setFormData({ ...formData, profileImage: null })}
-                  className="px-3 py-1 border rounded">Clear Image</button>
-              </div>
+        {/* Success */}
+        <div id="successSection" className={`${mode === "success" ? "" : "hidden"} text-center mt-10 p-12 bg-white rounded-2xl shadow-2xl border border-gray-100`}>
+          <div className="flex flex-col items-center justify-center gap-6">
+            <div className="w-28 h-28 flex items-center justify-center bg-green-500 rounded-full mb-6 animate-pulse shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+              </svg>
             </div>
-          </div>
-
-          {/* Middle column: Main inputs (two-column stacked areas) */}
-          <div className=" [space-y-6">
-            {/* Basic Info */}
-            {step === 1 && (
-              <div className="p-10 w-[50vw] h-[85.5vh] border rounded-lg bg-white">
-                <h3 className="font-semibold mb-3">Basic Information</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-sm font-medium"> Name</label>
-                    <input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                    {errors.name && <p className="text-xs text-red-600">{errors.name}</p>}
-                  </div>
- <div>
-                    <label className="text-sm font-medium">Full Name</label>
-                    <input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                    {errors.name && <p className="text-xs text-red-600">{errors.name}</p>}
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium">Email</label>
-                    <input value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                    {errors.email && <p className="text-xs text-red-600">{errors.email}</p>}
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Phone</label>
-                    <input value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Date of Birth</label>
-                    <input type="date" value={formData.dob} onChange={(e) => setFormData({ ...formData, dob: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Gender</label>
-                    <div className="flex gap-3 mt-2">
-                      {['Male','Female','Other'].map((g) => (
-                        <label key={g} className="flex items-center gap-2">
-                          <input type="radio" checked={formData.gender === g} onChange={() => setFormData({ ...formData, gender: g })} /> <span className="text-sm">{g}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <label className="text-sm font-medium">Address</label>
-                    <textarea value={formData.address} onChange={(e) => setFormData({ ...formData, address: e.target.value })} className="w-full border px-3 py-2 rounded h-20" />
-                  </div>
-                </div>
-
-                <div className="flex justify-end gap-3 pt-4">
-                  <button onClick={() => onClose && onClose()} className="px-4 py-2 border rounded">Cancel</button>
-                  <button onClick={() => handleNext(1)} className="px-4 py-2 bg-blue-600 text-white rounded">Next →</button>
-                </div>
-              </div>
-            )}
-
-            {/* Role & Employment */}
-            {step === 2 && (
-              <div className="p-10 w-[63vw]  h-[85vh] border rounded-lg bg-white">
-                <h3 className="font-semibold mb-6 text-[25px]">Post / Role </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-                  <div>
-                    <label className="text-sm font-medium">Department</label>
-                    <input value={formData.department} onChange={(e) => setFormData({ ...formData, department: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                    {errors.department && <p className="text-xs text-red-600">{errors.department}</p>}
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Position / Title</label>
-                    <input value={formData.position} onChange={(e) => setFormData({ ...formData, position: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                    {errors.position && <p className="text-xs text-red-600">{errors.position}</p>}
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Joining Date</label>
-                    <input type="date" value={formData.joiningDate} onChange={(e) => setFormData({ ...formData, joiningDate: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Experience (years)</label>
-                    <input value={formData.experience} onChange={(e) => setFormData({ ...formData, experience: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Manager Type</label>
-                    <select value={formData.employmentType} onChange={(e) => setFormData({ ...formData, employmentType: e.target.value })} className="w-full border px-3 py-2 rounded">
-                      <option>Project Manager</option>
-                      <option>Client Manager</option>
-                      <option>Contract</option>
-                      <option>Intern</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Work Mode</label>
-                    <select value={formData.workMode} onChange={(e) => setFormData({ ...formData, workMode: e.target.value })} className="w-full border px-3 py-2 rounded">
-                      <option>On-site</option>
-                      <option>Hybrid</option>
-                      <option>Remote</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Reporting To</label>
-                    <input value={formData.reportingTo} onChange={(e) => setFormData({ ...formData, reportingTo: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">CTC (₹/year)</label>
-                    <input value={formData.ctc} onChange={(e) => setFormData({ ...formData, ctc: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                  </div>
-                </div>
-
-                <div className="flex justify gap-140 pt-12">
-                  <button onClick={handleBack} className="px-4 py-2 border rounded  ">← Back</button>
-                  <div className="flex gap-3">
-                    <button onClick={() => setStep(3)} className="px-4 py-2 border rounded">Skip to Qualifications</button>
-                    <button onClick={() => handleNext(2)} className="px-4 py-2 bg-blue-600 text-white rounded">Next →</button>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Qualifications */}
-            {step === 3 && (
-              <div className="p-4 border w-[63vw]  h-[85vh] rounded-lg bg-white">
-                <h3 className="font-semibold mb-3">Qualification & Notes</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-sm font-medium">Highest Degree</label>
-                    <input value={formData.highestDegree} onChange={(e) => setFormData({ ...formData, highestDegree: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                    {errors.highestDegree && <p className="text-xs text-red-600">{errors.highestDegree}</p>}
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">University / Institute</label>
-                    <input value={formData.university} onChange={(e) => setFormData({ ...formData, university: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <label className="text-sm font-medium">Key Skills (comma separated)</label>
-                    <input value={formData.keySkills} onChange={(e) => setFormData({ ...formData, keySkills: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <label className="text-sm font-medium">Notes</label>
-                    <textarea value={formData.notes} onChange={(e) => setFormData({ ...formData, notes: e.target.value })} className="w-full border px-3 py-2 rounded h-24" />
-                  </div>
-                </div>
-
-                <div className="flex justify-between gap-3 pt-4">
-                  <button onClick={handleBack} className="px-4 py-2 border rounded">← Back</button>
-                  <button onClick={() => setStep(4)} className="px-4 py-2 bg-blue-600 text-white rounded">Next →</button>
-                </div>
-              </div>
-            )}
-
-            {/* Confirmation, Signature & Password */}
-            {step === 4 && (
-              <div className="p-4 border w-[63vw]  h-[85vh]  rounded-lg bg-white">
-                <h3 className="font-semibold mb-3">Confirmation & Create Portal</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="md:col-span-2">
-                    <label className="text-sm font-medium">Confirmation Message</label>
-                    <textarea value={formData.confirmationMessage} onChange={(e) => setFormData({ ...formData, confirmationMessage: e.target.value })} className="w-full border px-3 py-2 rounded h-20" />
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Digital Signature (type full name)</label>
-                    <input value={formData.digitalSignature} onChange={(e) => setFormData({ ...formData, digitalSignature: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                    {errors.digitalSignature && <p className="text-xs text-red-600">{errors.digitalSignature}</p>}
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Create Portal Password</label>
-                    <div className="flex items-center gap-2">
-                      <input type={showPassword ? 'text' : 'password'} value={formData.portalPassword} onChange={(e) => setFormData({ ...formData, portalPassword: e.target.value })} className="w-full border px-3 py-2 rounded" />
-                      <button type="button" onClick={() => setShowPassword((s) => !s)} className="px-3">
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                      </button>
-                    </div>
-                    {errors.portalPassword && <p className="text-xs text-red-600">{errors.portalPassword}</p>}
-                  </div>
-                </div>
-
-                <div className="flex justify-between gap-3 pt-4">
-                  <button onClick={handleBack} className="px-4 py-2 border rounded">← Back</button>
-                  <div className="flex gap-3">
-                    <button onClick={() => setStep(3)} className="px-4 py-2 border rounded">Edit</button>
-                    <button onClick={() => setStep(6)} className="px-4 py-2 bg-gray-100 rounded">Preview</button>
-                    <button onClick={handleSave} className="px-4 py-2 bg-green-600 text-white rounded">Done</button>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Preview Step (read-only) */}
-            {step === 6 && (
-              <div className="p-4 border w-[63vw] h-[100] rounded-lg bg-white">
-                <h3 className="font-semibold mb-3">Final Preview</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="col-span-1 flex flex-col items-center">
-                    <div className="w-36 h-36 rounded-full overflow-hidden border">
-                      {formData.profileImage ? (
-                        <img src={URL.createObjectURL(formData.profileImage)} className="w-full h-full object-cover" alt="pf" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-400">No image</div>
-                      )}
-                    </div>
-                    <p className="mt-3 font-medium">{formData.name}</p>
-                    <p className="text-sm text-gray-500">{formData.position} • {formData.department}</p>
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      <div><b>ID:</b> {formData.id}</div>
-                      <div><b>Status:</b> {formData.status}</div>
-                      <div><b>Email:</b> {formData.email}</div>
-                      <div><b>Phone:</b> {formData.phone}</div>
-                      <div><b>DOB:</b> {formData.dob}</div>
-                      <div><b>Gender:</b> {formData.gender}</div>
-                      <div className="md:col-span-2"><b>Address:</b> {formData.address}</div>
-                      <div><b>Joining:</b> {formData.joiningDate}</div>
-                      <div><b>Experience:</b> {formData.experience} years</div>
-                      <div><b>Employment:</b> {formData.employmentType}</div>
-                      <div><b>Work Mode:</b> {formData.workMode}</div>
-                      <div><b>Reporting To:</b> {formData.reportingTo}</div>
-                      <div><b>CTC:</b> {formData.ctc}</div>
-                      <div className="md:col-span-2"><b>Degree:</b> {formData.highestDegree} • {formData.university}</div>
-                      <div className="md:col-span-2"><b>Skills:</b> {formData.keySkills}</div>
-                      <div className="md:col-span-2"><b>Notes:</b> {formData.notes}</div>
-                      <div className="md:col-span-2"><b>Confirmation:</b> {formData.confirmationMessage}</div>
-                      <div className="md:col-span-2"><b>Signature:</b> {formData.digitalSignature}</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex justify-between gap-3 pt-4">
-                  <button onClick={() => setStep(4)} className="px-4 py-2 border rounded">← Back</button>
-                  <div className="flex gap-3">
-                    <button onClick={() => setStep(1)} className="px-4 py-2 border rounded">Edit</button>
-                    <button onClick={handleSave} className="px-4 py-2 bg-green-600 text-white rounded">Confirm & Save</button>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Success / Done Step */}
-            {step === 5 && (
-              <div className="p-10 text-center">
-                <h3 className="text-2xl font-bold text-green-600">🎉 Manager added successfully!</h3>
-                <p className="mt-3 text-gray-600">You can add another manager or close this dialog.</p>
-                <div className="flex justify-center gap-3 mt-6">
-                  <button onClick={resetForm} className="px-4 py-2 bg-blue-600 text-white rounded">Add Another</button>
-                  <button onClick={() => onClose && onClose()} className="px-4 py-2 border rounded">Close</button>
-                </div>
-              </div>
-            )}
+            <h2 className="text-4xl font-extrabold text-green-700">Employee Added Successfully!</h2>
+            <p className="text-blue-700 text-xl">Employee ID: <span className="font-semibold text-gray-900">{employeeId}</span></p>
+            <div className="flex gap-8 mt-8">
+              <button onClick={onReset} className="px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold shadow hover:bg-blue-700 transition duration-300">Add Another Employee</button>
+              <button onClick={() => alert("Going back to home page...")} className="px-8 py-4 bg-gray-200 text-blue-700 rounded-xl font-semibold shadow hover:bg-blue-50 transition duration-300">Back to Home</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
-} 
+}
