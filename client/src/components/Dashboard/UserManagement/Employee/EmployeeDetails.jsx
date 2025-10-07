@@ -15,6 +15,7 @@ import {
 import { FaEnvelope, FaSpinner, FaTasks, FaWhatsapp } from "react-icons/fa";
 import { FaPhoneFlip } from "react-icons/fa6"
 import { GiSandsOfTime } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
 
 export default function EmployeeDashboard() {
     const performanceData = [
@@ -59,12 +60,19 @@ export default function EmployeeDashboard() {
     ];
 
     const score = [{ name: "Performance", value: 87, fill: "#22c55e" }];
-
+    const navigate = useNavigate();
     return (
         <div className="w-full min-h-screen bg-gray-100">
             <div className="p-4 max-w-[1600px] mx-auto">
-                <h1 className="text-2xl font-bold mb-2 sticky top-4">Employee Performance Dashboard</h1>
-
+                <div className="flex justify-between mb-2 sticky top-4">
+                    <h1 className="text-2xl font-bold">Employee Performance Dashboard</h1>
+                    <button
+                        onClick={() => navigate("/dashboard/employee")}
+                        className="px-5 py-1 bg-gray-200 text-blue-700 rounded-lg font-semibold shadow hover:bg-blue-50 transition"
+                    >
+                        Back
+                    </button>
+                </div>
                 {/* LAYOUT FIXED FOR LAPTOP */}
                 <div className="flex min-h-[90vh]">
 
