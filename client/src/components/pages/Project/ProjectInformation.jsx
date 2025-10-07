@@ -51,7 +51,7 @@ const ProjectInformation = () => {
       <section className="relative h-[50vh] sm:h-[70vh] md:h-[80vh] lg:h-screen">
         <motion.div className="fixed inset-0 -z-10" style={{ scale }}>
           <img
-            src={`http://localhost:5000/public/project-images/${project.images[0]}.jpg`}
+            src={`/public/project-images/${project.images[0]}.jpg`}
             alt="Background"
             className="h-full w-full object-cover object-center"
           />
@@ -99,7 +99,7 @@ const ProjectInformation = () => {
       <section className="relative h-[100%] sm:h-[100%] md:h-[100%] lg:h-screen bg-black flex items-center justify-center px-4  ">
         <motion.div>
           <img
-            src={`http://localhost:5000/public/project-images/${project.images[1]}.jpg`}
+            src={`/public/project-images/${project.images[1]}.jpg`}
             alt="Background"
             className="h-[100%] w-[100vw] sm:h-[100%] lg:h-[90vh] object-cover rounded-2xl shadow-xl shadow-gray-800"
           />
