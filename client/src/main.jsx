@@ -15,6 +15,7 @@ import IndustryAnalysis from "./components/Dashboard/IndustryAnalysis/IndustryAn
 import Notification from "./components/Dashboard/Notification/Notification.jsx";
 import Workspace from "./components/Dashboard/WorkSpace/Workspace.jsx";
 import Employee from "./components/Dashboard/UserManagement/Employee/Employee.jsx";
+import AddEmployee from "./components/Dashboard/UserManagement/Employee/AddEmployee.jsx";
 import Manager from "./components/Dashboard/UserManagement/Manager/Manager.jsx";
 import ManagerForm from "./components/Dashboard/UserManagement/Manager/ManagerForm.jsx";
 import ManagerDetails from "./components/Dashboard/UserManagement/Manager/ManagerDetails.jsx";
@@ -23,6 +24,7 @@ import Blog from "./components/Dashboard/Service/Blog.jsx";
 import ClientRating from "./components/Dashboard/Service/ClientRating.jsx";
 import ProjectShowCase from "./components/Dashboard/Service/ProjectShowCase.jsx";
 import ProtectedRoutes from "./components/Dashboard/ProtectedRoutes.jsx";
+import EmployeeDetails from "./components/Dashboard/UserManagement/Employee/EmployeeDetails.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -156,11 +158,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/add-employee",
-        element: <ManagerForm />
+        element: <AddEmployee />
       },
       {
         path: "/dashboard/employeedetails",
-        element: <ManagerDetails />
+        element: <EmployeeDetails />
       }
     ]
   },

@@ -1,342 +1,208 @@
-import { useState } from "react";
+import { FaBed, FaUsers } from "react-icons/fa";
+import { BsLightningChargeFill } from "react-icons/bs";
+import { MdDangerous } from "react-icons/md";
+import { useEffect, useRef, useState } from "react";
+import Chart from "chart.js/auto";
 import { useNavigate } from "react-router-dom";
 
-import {
-  FaSearch,
-  FaEye,
-  FaEdit,
-  FaTrash,
-  FaPlus,
-  FaCheck,
-  FaTimes,
-} 
-from "react-icons/fa";
+const Employee = () => {
 
-function Employee() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [Employee, setEmployee] = useState([
-    {
-      id: "E001",
-      name: "Arjun Sharma",
-      email: "arjun.sharma@example.com",
-      Role: "Front-end developer",
-      status: "Active",
-    },
-    {
-      id: "E002",
-      name: "Priya Verma",
-      email: "priya.verma@example.com",
-      Role: "Front-end developer",
-      status: "Inactive",
-    },
-    {
-      id: "E003",
-      name: "Rahul Mehta",
-      email: "rahul.mehta@example.com",
-      Role: "Front-end developer",
-      status: "Active",
-    },
-    {
-      id: "E004",
-      name: "Sneha Kapoor",
-      email: "sneha.kapoor@example.com",
-      Role:"UI/UX designer",
-      status: "Active",
-    },
-    {
-      id: "E005",
-      name: "Vikas Yadav",
-      email: "vikas.yadav@example.com",
-      Role:"UI/UX designer",
-      status: "Inactive",
-    },
-    {
-      id: "E006",
-      name: "Aditi Singh",
-      email: "aditi.singh@example.com",
-      Role:"UI/UX designer",
-      status: "Active",
-    },
-  ]);
-
-  const [editId, setEditId] = useState(null);
-  const [editData, setEditData] = useState({ name: "", type: "", status: "" });
-
-  // 🔹 Filter by search
-  const filteredEmployee = Employee.filter(
-    (E) =>
-      E.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      E.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      E.Role.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      E.status.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // 🔹 Pagination states
-  const [currentPage, setCurrentPage] = useState(1);
-  const EmployeePerPage = 5;
-  const indexOfLast = currentPage * EmployeePerPage;
-  const indexOfFirst = indexOfLast - EmployeePerPage;
-  const currentEmployee = filteredEmployee.slice(indexOfFirst, indexOfLast);
-  const totalPages = Math.ceil(filteredEmployee.length / EmployeePerPage);
-
-  const addEmployee = (newEmployee) => {
-    setEmployee([...Employee, newEmployee]);
-  };
-
-  const deleteEmployee = (id) => {
-    if (window.confirm("Are you sure you want to delete this Employee?")) {
-      setEmployee(Employee.filter((E) => E.id !== id));
-    }
-  };
-
-  const startEdit = (E) => {
-    setEditId(E.id);
-    setEditData({ name: E.name, type: E.type, status: E.status });
-  };
-
-  const saveEdit = (id) => {
-    setEmployee(
-      Employee.map((E) =>
-        E.id === id
-          ? {
-              ...E,
-              name: editData.name,
-              type: editData.type,
-              status: editData.status,
-            }
-          : E
-      )
-    );
-    setEditId(null);
-  };
+  const chartRef = useRef(null);
+  useEffect(() => {
+    const ctx = chartRef.current.getContext("2d");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: [
+          "Sarah Johnson",
+          "Michael Chen",
+          "Maria Rodriguez",
+          "David Kim",
+          "James Wilson",
+        ],
+        datasets: [
+          {
+            label: "Performance",
+            data: [95, 85, 80, 70, 60],
+            backgroundColor: [
+              "#6366f1",
+              "#06b6d4",
+              "#10b981",
+              "#f59e0b",
+              "#ef4444",
+            ],
+            borderRadius: 8,
+          },
+        ],
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, ticks: { color: "#222" } },
+          x: { ticks: { color: "#222" } },
+        },
+      },
+    });
+  }, []);
 
   const navigate = useNavigate();
+  const employees = [
+    { id: "EMP-001", name: "Alice Johnson", role: "Developer", email: "sarahj@company.com", lastLogin: "Today, 09:24 AM", status: "Active" },
+    { id: "EMP-002", name: "Bob Smith", role: "Designer", email: "sarahj@company.com", lastLogin: "Yesterday, 3:45 PM", status: "Active" },
+    { id: "EMP-003", name: "Charlie Brown", role: "Product Manager", email: "sarahj@company.com", lastLogin: "2 days ago", status: "On Leave" },
+    { id: "EMP-004", name: "David Wilson", role: "QA Engineer", email: "sarahj@company.com", lastLogin: "Today, 11:30 AM", status: "Active" },
+    { id: "EMP-005", name: "Eva Green", role: "DevOps Engineer", email: "sarahj@company.com", lastLogin: "3 days ago", status: "Suspended" },
+    { id: "EMP-006", name: "Frank Miller", role: "Business Analyst", email: "sarahj@company.com", lastLogin: "5 days ago", status: "Active" },
+    { id: "EMP-007", name: "Grace Lee", role: "HR Manager", email: "sarahj@company.com", lastLogin: "Today, 08:15 AM", status: "Active" },
+    { id: "EMP-008", name: "Hannah Davis", role: "Marketing Specialist", email: "sarahj@company.com", lastLogin: "Yesterday, 4:20 PM", status: "On Leave" },
+  ];
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const employeesPerPage = 5;
+
+  // Filter employees by id, name, role, status
+  const filteredEmployees = employees.filter((emp) =>
+    [emp.id, emp.name, emp.role, emp.status]
+      .some((field) => field.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredEmployees.length / employeesPerPage);
+  const startIndex = (currentPage - 1) * employeesPerPage;
+  const currentEmployees = filteredEmployees.slice(
+    startIndex,
+    startIndex + employeesPerPage
+  );
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
 
   return (
-    <>
-      <div className="p-4 ">
-        {/* Summary Cards */}
-        <div className="flex justify-center gap-8 mb-8 flex-wrap">
-          {/* Total Employees */}
-          <div className="bg-white rounded-lg shadow-md px-8 py-6 border-l-4 border-blue-500 w-72 text-center">
-            <h2 className="text-lg font-semibold text-gray-700">
-              Total Employees
-            </h2>
-            <p className="text-4xl font-bold text-blue-600 mt-2">
-              {Employee.length}
-            </p>
-          </div>
-
-          {/* Active Employees */}
-          <div className="bg-white rounded-lg shadow-md px-8 py-6 border-l-4 border-green-500 w-72 text-center">
-            <h2 className="text-lg font-semibold text-gray-700">
-              Active Employees
-            </h2>
-            <p className="text-4xl font-bold text-green-600 mt-2">
-              {Employee.filter((e) => e.status === "Active").length}
-            </p>
-          </div>
-
-          {/* Inactive Employees */}
-          <div className="bg-white rounded-lg shadow-md px-8 py-6 border-l-4 border-red-700 w-72 text-center">
-            <h2 className="text-lg font-semibold text-gray-700">
-              Inactive Employees
-            </h2>
-            <p className="text-4xl font-bold text-purple-600 mt-2">
-              {Employee.filter((e) => e.status === "Inactive").length}
-            </p>
-          </div>
+    <div className='overflow-y-auto no-scrollbar h-full'>
+      <h1 className='text-3xl font-bold mb-6'>Employee Dashboard</h1>
+      {/* Card */}
+      <div className='grid grid-cols-1 md:grid-cols-4 gap-6 mb-6'>
+        <div className='bg-white p-4 rounded-xl shadow cursor-pointer hover:shadow-xl transition-shadow duration-200 hover:-translate-y-0.5 ease-in-out flex flex-col items-center justify-center h-40 border-l-4 border-blue-500'>
+          <FaUsers className='h-10 w-10 mb-2 text-blue-500' />
+          <p className="font-semibold">Total employees</p> 
+          <h1 className="text-2xl font-bold text-blue-500">100</h1>
         </div>
-
-        {/* Search + Add bar */}
-        <div className="flex justify-between items-center mb-2">
-          {/* Search bar */}
-          <div className="flex items-center bg-white px-4 py-2 rounded-full w-80 shadow-md">
-            <FaSearch className="text-slate-400 mr-2" />
-            <input
-              type="text"
-              placeholder="Search by ID, Name, Role or Status"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="outline-none w-full text-sm bg-transparent text-slate-700"
-            />
-          </div>
-
-          {/* Add new Employee */}
-          <button
-            onClick={() => navigate("/dashboard/add-employee")}
-            className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition text-white px-5 py-2 rounded-full shadow-md"
-          >
-            <FaPlus />
-            <span className="hidden sm:inline">Add Employee</span>
-          </button>
+        <div className='bg-white p-4 rounded-xl shadow cursor-pointer hover:shadow-xl transition-shadow duration-200 hover:-translate-y-0.5 ease-in-out flex flex-col items-center justify-center h-40 border-l-4 border-green-500'>
+          <BsLightningChargeFill className='h-10 w-10 mb-2 text-green-500' />
+          <p className="font-semibold">Active</p>
+          <h1 className="text-2xl font-bold text-green-500">95</h1>
         </div>
-
-        {/* Employee Table */}
-        <div className=" bg-white shadow-lg rounded-xl overflow-hidden">
-          <table className="w-full">
-            <thead>
-              <tr className="bg-slate-100 text:sm text-slate-600">
-                <th className="px-6 py-4 text-left font-semibold">
-                  Employee ID
-                </th>
-                <th className="px-6 py-4 text-left font-semibold">Name</th>
-                <th className="px-6 py-4 text-left font-semibold">Email</th>
-                <th className="px-6 py-4 text-left font-semibold">Role</th>
-                <th className="px-6 py-4 text-left font-semibold">Status</th>
-                <th className="px-6 py-4 text-left font-semibold">Action</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {currentEmployee.map((E) => (
-                <tr key={E.id} className="hover:bg-slate-50 transition">
-                  <td className="px-6 py-4 text-slate-800 font-medium">
-                    {E.id}
-                  </td>
-
-                  {/* Editable Name */}
-                  <td className="px-6 py-4">
-                    {editId === E.id ? (
-                      <input
-                        type="text"
-                        value={editData.name}
-                        onChange={(e) =>
-                          setEditData({ ...editData, name: e.target.value })
-                        }
-                        className="border border-slate-200 px-2 py-1 rounded-lg w-full text-sm shadow-sm focus:ring-2 outline-none"
-                      />
-                    ) : (
-                      <span className="text-slate-700">{E.name}</span>
-                    )}
-                  </td>
-
-                  {/* Email */}
-                  <td className="px-6 py-4 text-slate-500">{E.email}</td>
-
-                  {/* Editable Role */}
-                  <td className="px-6 py-4">
-                    {editId === E.id ? (
-                      <input
-                        type="text"
-                        value={editData.type}
-                        onChange={(e) =>
-                          setEditData({ ...editData, type: e.target.value })
-                        }
-                        className="border border-slate-200 px-2 py-1 rounded-lg w-full text-sm shadow-sm focus:ring-2 outline-none"
-                      />
-                    ) : (
-                      <span className="text-slate-700">{E.Role}</span>
-                    )}
-                  </td>
-
-                  {/* Editable Status */}
-                  <td className="px-6 py-4">
-                    {editId === E.id ? (
-                      <select
-                        value={editData.status}
-                        onChange={(e) =>
-                          setEditData({ ...editData, status: e.target.value })
-                        }
-                        className="px-3 py-2 w-full text-sm rounded-xl shadow-md bg-gray-300 backdrop-blur-sm outline-none focus:ring-2 transition-all duration-300"
-                      >
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                      </select>
-                    ) : (
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          E.status === "Active"
-                            ? "bg-green-100 text-green-700"
-                            : "bg-red-100 text-red-700"
-                        }`}
-                      >
-                        {E.status}
-                      </span>
-                    )}
-                  </td>
-
-                  {/* Actions */}
-                  <td className="px-6 py-4 text-center">
-                    {editId === E.id ? (
-                      <div className="flex justify-center gap-2">
-                        <button
-                          onClick={() => saveEdit(E.id)}
-                          className="bg-green-400 hover:bg-green-600 text-black p-3 rounded-full shadow-sm transition"
-                        >
-                          <FaCheck className="text-lg" />
-                        </button>
-                        <button
-                          onClick={() => setEditId(null)}
-                          className="bg-red-400 hover:bg-red-600 text-black p-3 rounded-full shadow-sm transition"
-                        >
-                          <FaTimes className="text-lg" />
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="flex justify-center gap-4 text-slate-500">
-                        <button
-                          onClick={() => navigate("/dashboard/employeedetails")}
-                          className="hover:text-green-600 transition"
-                        >
-                          <FaEye />
-                        </button>
-                        <button
-                          onClick={() => startEdit(E)}
-                          className="hover:text-yellow-600 transition"
-                        >
-                          <FaEdit />
-                        </button>
-                        <button
-                          onClick={() => deleteEmployee(E.id)}
-                          className="hover:text-red-600 transition"
-                        >
-                          <FaTrash />
-                        </button>
-                      </div>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          {/* Pagination */}
-          <div className="flex justify-between items-center px-5 py-5 bg-slate-50">
-            <span className="text-sm text-slate-600">
-              Page {currentPage} of {totalPages}
-            </span>
-
-            <div className="flex gap-3">
-              <button
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-                className={`px-4 py-1 rounded-md text-sm font-medium shadow ${
-                  currentPage === 1
-                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                    : "bg-indigo-600 text-white hover:bg-indigo-700"
-                }`}
-              >
-                Previous
-              </button>
-              <button
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
-                disabled={currentPage === totalPages}
-                className={`px-4 py-1 rounded-md text-sm font-medium shadow ${
-                  currentPage === totalPages
-                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                    : "bg-indigo-600 text-white hover:bg-indigo-700"
-                }`}
-              >
-                Next
-              </button>
-            </div>
-          </div>
+        <div className='bg-white p-4 rounded-xl shadow cursor-pointer hover:shadow-xl transition-shadow duration-200 hover:-translate-y-0.5 ease-in-out flex flex-col items-center justify-center h-40 border-l-4 border-yellow-500'>
+          <FaBed className='h-10 w-10 mb-2 text-yellow-500' />
+          <p className="font-semibold">On leave</p>
+          <h1 className="text-2xl font-bold text-yellow-500">4</h1>
+        </div>
+        <div className='bg-white p-4 rounded-xl shadow cursor-pointer hover:shadow-xl transition-shadow duration-200 hover:-translate-y-0.5 ease-in-out flex flex-col items-center justify-center h-40 border-l-4 border-red-500'>
+          <MdDangerous className='h-10 w-10 mb-2 text-red-500' />
+          <p className="font-semibold">Suspended</p>
+          <h1 className="text-2xl font-bold text-red-500">1</h1> 
         </div>
       </div>
-    </>
-  );
+      {/* Chart  */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div className="bg-white p-6 rounded-xl shadow hover:shadow-xl transition-shadow duration-200 hover:-translate-y-0.5">
+          <h2 className="text-lg font-semibold mb-4">Top 5 Performers</h2>
+          <canvas ref={chartRef} className="w-full h-60"></canvas>
+        </div>
+        <div className="bg-white p-6 rounded-xl shadow hover:shadow-xl transition-shadow duration-200 hover:-translate-y-0.5 flex flex-col items-center justify-center">
+          <h2 className="text-lg font-semibold mb-6">Employee of the Company</h2>
+          <img src="https://i.pravatar.cc/100" alt="Employee" className="w-24 h-24 rounded-full border-4 border-blue-500 mb-4" />
+          <h3 className="text-xl font-bold">Sarah Johnson</h3>
+          <p className="text-sm text-gray-500">Senior Developer</p>
+          <span className="bg-green-500 text-white text-xs px-3 py-1 rounded-full mt-2">Active</span>
+          <p className="text-gray-600 text-center mt-3 text-sm">
+            Recognized for outstanding performance and dedication to the team.
+          </p>
+        </div>
+      </div>
+      {/* Table  */}
+      <div className="bg-white rounded-xl shadow p-4">
+        <div className="flex justify-between items-center mb-3"> 
+          <h1 className="text-lg font-semibold">All Employees</h1>
+          <div className="flex gap-2">
+            <input type="text"
+              placeholder="Search employees by ID, name, role, status" 
+              className="px-3 py-2 rounded-lg text-sm border border-gray-300 outline-none w-74" 
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1);
+              }}
+            />
+            <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg" onClick={() => navigate('/dashboard/add-employee')}>Add Employee</button>
+          </div>
+        </div>
+        <hr className="mb-2"/>
+        <table className="w-full text-center border-collapse">
+          <thead className="text-gray-500 text-sm border-b border-gray-300">
+            <tr>
+              <th className="py-3">ID</th>
+              <th className="py-3">Employee</th>
+              <th className="py-3">Role</th>
+              <th className="py-3">Last Login</th>
+              <th className="py-3">Status</th>
+              <th className="py-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="text-sm">
+            {currentEmployees.length > 0 ? currentEmployees.map((emp) => (
+              <tr key={emp.id} className="border-b border-gray-200">
+                <td className="py-3 text-blue-500">{emp.id}</td>
+                <td className="py-3 font-semibold">
+                  {emp.name}<br />
+                  <span className="text-gray-500 text-xs">{emp.email}</span>
+                </td>
+                <td className="py-3">{emp.role}</td>
+                <td className="py-3">{emp.lastLogin}</td>
+                <td className="py-3">
+                  <span className={`px-2 py-1 rounded-full text-xs text-white ${emp.status === 'Active' ? 'bg-green-500' : emp.status === 'On Leave' ? 'bg-yellow-500' : 'bg-red-500'}`}>{emp.status}</span>
+                </td>
+                <td className="py-3 flex gap-2 justify-center">
+                  <button className="text-yellow-500">✏️</button>
+                  <button className="text-blue-500" onClick={() => navigate('/dashboard/employeedetails')}>👁️</button>
+                  <button className="text-red-500">🗑️</button>
+                </td>
+              </tr>
+            )) : (
+              <tr>
+                <td colSpan="6" className="py-4 text-gray-500">No employees found.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+        {filteredEmployees.length > employeesPerPage &&
+          <div className="flex justify-between items-center mt-4 text-gray-500 text-sm">
+            <p>Page {currentPage} of {totalPages}</p>
+            <div className="flex gap-2">
+              <button
+                className="px-5 py-2 bg-red-500 text-white rounded-sm"
+                onClick={handlePrevPage}
+                disabled={currentPage === 1}
+              >
+                Prev</button>
+              <button
+                className="px-5 py-2 bg-blue-500 text-white rounded-sm "
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+              >
+                Next</button>
+            </div>
+          </div>
+        }
+      </div>
+    </div >
+  )
 }
 
-export default Employee;
+export default Employee
